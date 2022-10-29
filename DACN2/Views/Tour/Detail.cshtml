@@ -76,15 +76,31 @@
 
                 <section class="section-02">
                     <div class="container">
-                        <div class="">
-                            <div class="col-lg-5 col-md-12 col-sm-12
-                                    center">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12 col-sm-12 left">
                                 <div class="image">
-                                    <img src="@Html.DisplayFor(model => model.Hinh)" alt="Alternate Text" />
-
+                                    <img src="@Html.DisplayFor(model => model.Hinh)" class="img-fluid" alt="image">
                                 </div>
                             </div>
-
+                            <div class="col-lg-5 col-md-12 col-sm-12 right">
+                                <div class="row gy-4">
+                                    <div class="col-md-12 col-sm-12 small">
+                                        <div class="row" style="display:flex;">
+                                            <div class="col-6">
+                                                <div class="image image2">
+                                                    <img src="@Html.DisplayFor(model => model.Hinh2)" class="img-fluid" alt="image">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="image image2">
+                                                    <img src="@Html.DisplayFor(model => model.Hinh3)" class="img-fluid" alt="image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -98,7 +114,7 @@
                             <div class="row">
                                 <div class="col-md-5 col-12 left">
 
-                                    @{ string[] ps = Model.ChiTietTour.Split('.');
+                                    @{ string[] ps = Model.NoiDung.Split('.');
 
                                         for (byte i = 0; i < ps.Length; i++)
                                         {
@@ -107,14 +123,14 @@
                                     <div class="box-code d-lg-none">
                                         <div class="d-flex flex-column">
                                             <span>Mã tour:</span>
-                                            <span class="fw-bold">NDSGN585-003-191022VU-V</span>
+                                            <span class="fw-bold"> @Html.DisplayFor(model => model.LoaiTour.TenLoaiTour)</span>
                                         </div>
                                         <i class="icon icon--ticket"></i>
                                     </div>
                                     <div class="box-order">
                                         <div class="time">
-                                            <p>Khởi hành <b>19/10/2022</b></p>
-                                            <p>Thời gian <b>3 ngày</b></p>
+                                            <p>Khởi hành <b>@Html.DisplayFor(model => model.NgayKhoiHanh)</b></p>
+                                            <p>Thời gian <b>@Html.DisplayFor(model => model.ThoiGian)</b></p>
                                             <p>
                                                 Nơi khởi hành <b>
                                                     TP. Hồ Chí
@@ -122,19 +138,14 @@
                                                 </b>
                                             </p>
                                             <p>
-                                                Số chỗ còn nhận <b>8</b>
+                                                Số chỗ còn nhận <b>@Html.DisplayFor(model => model.SoCho)</b>
+                                            </p>
+                                            <p>
+                                                Khách Sạn <b>@Html.DisplayFor(model => model.KSan.TenKhachSan)</b>
                                             </p>
                                         </div>
                                         <div class="calendar">
-                                            <div class="calendar-box">
-                                                <i class="icon
-                                                        icon--calendar"></i>
-                                                <label>
-                                                    <a href="/tim-tat-ca-tour/NDSGN585/ket-qua-tim-kiem.aspx">
-                                                        Ngày khác
-                                                    </a>
-                                                </label>
-                                            </div>
+                                                <input type="date" name="name" value="" style="width: 20px" />                                            
                                         </div>
                                     </div>
                                     <div class="box-support">
@@ -162,78 +173,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-12 right">
-                                    <div class="group-services">
-                                        <div class="item">
 
-                                            <label>Thời gian</label>
-                                            <p>3 ngày 2 đêm</p>
-                                        </div>
-                                        <div class="item">
-
-                                            <label>Phương tiện di chuyển</label>
-                                            <p>Máy bay, Xe du lịch</p>
-                                        </div>
-                                        <div class="item">
-
-                                            <label>Điểm tham quan</label>
-                                            <p>
-                                                Quy nhon, Binh Dinh, Phu Yen,
-                                                Eo Gio, Ganh Da Dia, Thap
-                                                Nghing Phong, Nha Tho Mang
-                                                Lang
-                                            </p>
-                                        </div>
-                                        <div class="item">
-
-                                            <label>Ẩm thực</label>
-                                            <p>
-                                                Buffet sáng, Theo thực đơn,
-                                                Đặc sản địa phương
-                                            </p>
-                                        </div>
-                                        <div class="item">
-
-                                            <label>Khách sạn</label>
-                                            <p>Khách sạn 3 sao</p>
-                                        </div>
-                                        <div class="item">
-
-                                            <label>Thời gian lý tưởng</label>
-                                            <p>Quanh năm</p>
-                                        </div>
-                                        <div class="item">
-
-                                            <label>Đối tượng thích hợp</label>
-                                            <p>
-                                                Cặp đôi, Gia đình nhiều thế
-                                                hệ, Thanh niên
-                                            </p>
-                                        </div>
-                                        <div class="item">
-
-                                            <label>Ưu đãi</label>
-                                            <p>
-                                                Đã bao gồm ưu đãi trong giá
-                                                tour
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="box-map hardCode d-none">
-                                        <div class="addess">
-                                            <i class="icon
-                                                    icon--location-marker"></i>
-                                            <label>
-                                                VinWonder, Đ. Phú Quốc,
-                                                Việt Nam
-                                            </label>
-                                        </div>
-                                        <div class="map">
-                                            <i class="icon icon--map"></i>
-                                            <label>
-                                                VinWonder, Đ. Phú Quốc,
-                                                Việt Nam
-                                            </label>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -272,10 +212,7 @@
                                                 <span class="date-right">
                                                     <span class="date">19/10/2022</span>
                                                     <span class="location">
-                                                        TP.HỒ
-                                                        CHÍ MINH – PHÚ YÊN
-                                                        Số bữa ăn: 01 bữa
-                                                        (Ăn tối)
+                                                        @Html.DisplayFor(model => model.LichTrinh.Moc1)
                                                     </span>
                                                 </span>
                                             </div>
@@ -290,10 +227,7 @@
                                                 <span class="date-right">
                                                     <span class="date">20/10/2022</span>
                                                     <span class="location">
-                                                        PHÚ
-                                                        YÊN - QUY NHƠN Số
-                                                        bữa ăn: 03 bữa
-                                                        (sáng, trưa, tối)
+                                                        @Html.DisplayFor(model => model.LichTrinh.Moc2)
                                                     </span>
                                                 </span>
                                             </div>
@@ -308,114 +242,41 @@
                                                 <span class="date-right">
                                                     <span class="date">21/10/2022</span>
                                                     <span class="location">
-                                                        QUY
-                                                        NHƠN - TP.HỒ CHÍ
-                                                        MINH Số bữa ăn: 02
-                                                        bữa (sáng, trưa)
+                                                        @Html.DisplayFor(model => model.LichTrinh.Moc3)
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="day day-01">
+                                            <div class="wrapper">
+                                                <span class="date-left">
+                                                    Ngày
+                                                </span>
+                                                <span class="date-center
+                                                        active">4</span>
+                                                <span class="date-right">
+                                                    <span class="date">19/10/2022</span>
+                                                    <span class="location">
+                                                        @Html.DisplayFor(model => model.LichTrinh.Moc4)
                                                     </span>
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="live-video hardCode d-none">
-                                        <a href="#" class="video">
-                                            <i class="fad fa-play-circle"></i>
-                                            <label>
-                                                Thuyết minh chương trình
-                                                tour
-                                            </label>
-                                        </a>
-                                    </div>
+                                    
                                 </div>
                                 <div class="col-md-8 col-12 right
                                         timeline-section">
                                     <div>
                                         <h2 id="day-01">
-                                            Ngày 1 - TP.HỒ CHÍ
-                                            MINH – PHÚ YÊN Số bữa ăn: 01 bữa
-                                            (Ăn tối)
+                                            @Html.DisplayFor(model => model.LichTrinh.Moc1)
                                         </h2>
                                         <div class="excerpt">
                                             <span class="line"></span>
-                                            <title></title>
-
 
                                             <div style="text-align:justify">
                                                 <div>
-                                                    Quý khách tập trung tại
-                                                    cột A17 <strong>
-                                                        ga đi
-                                                        Trong Nước Sân bay
-                                                        Tân Sơn Nhất,
-                                                    </strong>hướng dẫn viên
-                                                    hỗ trợ làm thủ tục cho
-                                                    đoàn đáp chuyến bay đi
-                                                    sân bay Phù Cát (Quy
-                                                    Nhơn). Đến nơi, xe và
-                                                    hướng dẫn viên <a href="https://www.vietravel.com?utm_source=internalbl&amp;utm_medium=click&amp;utm_campaign=ATLinks"
-                                                                      target="_blank">Vietravel</a>
-                                                    đón đoàn khởi hành đi
-                                                    Phú Yên, trên đường tham
-                                                    quan:<br>
-                                                    <br>
-                                                    <strong>
-                                                        - Tháp Nghinh
-                                                        Phong:
-                                                    </strong> một
-                                                    thiết kế đặc biệt ấn
-                                                    tượng lấy cảm hứng từ
-                                                    ghềnh đá đĩa mang tính
-                                                    biểu tượng của địa
-                                                    phương và truyền thuyết
-                                                    “Trăm trứng trăm con”
-                                                    của Lạc Long quân và Âu
-                                                    Cơ, là điểm đến hấp dẫn,
-                                                    thu hút sự chú ý của
-                                                    nhiều bạn trẻ hẹn nhau
-                                                    sẽ tới nơi này để
-                                                    check-in.<br>
-                                                    <br>
-                                                    Xe đưa Quý khách về lại
-                                                    trung tâm nhận phòng.
-                                                    Quý khách nghỉ ngơi.
-                                                    Buổi chiều, xe đưa Quý
-                                                    khách đến thưởng thức
-                                                    bữa tối tại:<br>
-                                                    <br>
-                                                    <strong>
-                                                        - Khu <a href="https://travel.com.vn/?utm_source=internalbl&amp;utm_medium=click&amp;utm_campaign=ATLinks"
-                                                                 target="_blank">
-                                                            du
-                                                            lịch
-                                                        </a> Sông Ba
-                                                        Farmstay:
-                                                    </strong>
-                                                    bắt mắt bởi vườn rau
-                                                    sạch công nghệ cao tọa
-                                                    lạc ngay bên bờ sông ba
-                                                    được bao quanh bởi làng
-                                                    rau Ngọc Lãng bình yên
-                                                    và gần gũi. Quý khách
-                                                    được dịp ngắm hoàng hôn
-                                                    buông dần trên dòng sông
-                                                    hiền hòa và thưởng thức
-                                                    bữa tối với các loại rau
-                                                    organic tươi ngon.<br>
-                                                    Buổi tối, đoàn tự do dạo
-                                                    chợ đêm Phú Yên, thưởng
-                                                    thức các món ăn lạ miệng
-                                                    như bánh canh hẹ, hải
-                                                    sản tươi ngon, các món
-                                                    ăn từ cá ngừ,... hay
-                                                    thưởng thức ly dừa dầm
-                                                    trân châu, các quán cà
-                                                    phê xinh xắn dọc đường
-                                                    đại lộ Hùng Vương,....<br>
-                                                    <br>
-                                                    <strong>
-                                                        Nghỉ đêm tại Phú
-                                                        Yên.
-                                                    </strong><br>
+                                                    -  @Html.DisplayFor(model => model.LichTrinh.CTMoc1)
                                                     &nbsp;
                                                 </div>
                                             </div>
@@ -428,7 +289,7 @@
                                                 <i class="icon
                                                         icon--calendar"></i>
                                                 <label>Khách sạn</label>
-                                                <p>VinOasis Phú Quốc</p>
+                                                <p> @Html.DisplayFor(model => model.KSan.TenKhachSan)</p>
                                             </div>
                                             <div class="item">
                                                 <i class="icon icon--fire"></i>
@@ -444,9 +305,7 @@
                                     </div>
                                     <div>
                                         <h2 id="day-02">
-                                            Ngày 2 - PHÚ YÊN -
-                                            QUY NHƠN Số bữa ăn: 03 bữa
-                                            (sáng, trưa, tối)
+                                            @Html.DisplayFor(model => model.LichTrinh.Moc2)
                                         </h2>
                                         <div class="excerpt">
                                             <span class="line"></span>
@@ -455,109 +314,8 @@
 
                                             <div style="text-align:justify">
                                                 <div>
-                                                    Dùng bữa sáng tại khách
-                                                    sạn và làm thủ tục trả
-                                                    phòng, xe đưa đoàn khởi
-                                                    hành đi tham quan:<br>
-                                                    <br>
-                                                    <strong>
-                                                        - Đền thờ Lương
-                                                        Văn Chánh:
-                                                    </strong>
-                                                    là địa điểm được xây
-                                                    dựng để tưởng nhớ công
-                                                    ơn của cụ Lương Văn
-                                                    Chánh - được mệnh danh
-                                                    là “thành Hoàng”. Nơi
-                                                    đây nổi tiếng gần xa bởi
-                                                    cảnh đẹp thiên nhiên
-                                                    hoài cổ mang nét rêu
-                                                    phong cổ kính đậm chất
-                                                    cũ xưa đẹp tựa bức tranh
-                                                    sơn thủy. Điểm đặc biệt
-                                                    là cây bồ đề có ba thân
-                                                    được công nhận Cây Di
-                                                    Sản Việt Nam bám rễ
-                                                    thành từng chùm rất chặt
-                                                    vào bức tường phía trước
-                                                    của ngôi đền vừa độc
-                                                    đáo, vừa thêm phần cảnh
-                                                    quan uy nghiêm tô điểm
-                                                    cho đền.<br>
-                                                    <br>
-                                                    <strong>- Sky Panorama:</strong>
-                                                    nằm trên cao nguyên Vân
-                                                    Hòa có khí hậu mát mẻ
-                                                    quanh năm, thời tiết khá
-                                                    dễ chịu cho Quý khách
-                                                    thỏa sức ngắm cảnh và
-                                                    chụp ảnh. Điểm đặc biệt
-                                                    khi đến Sky Panorama là
-                                                    Quý khách có thể vừa
-                                                    thưởng thức đồ uống, vừa
-                                                    phóng tầm mắt ngắm cảnh
-                                                    núi đồi xanh mướt bên
-                                                    dưới, hay chụp ảnh cùng
-                                                    những chiếc lều trắng
-                                                    xinh xắn nổi bật giữa
-                                                    nền trời xanh thẳm.<br>
-                                                    <br>
-                                                    Đoàn dùng bữa trưa tại
-                                                    <strong>
-                                                        Đầm Ô Loan.
-                                                    </strong>Sau đó, tiếp
-                                                    tục di chuyển về <a href="https://travel.com.vn/phu-yen/tour-tuy-hoa.aspx?utm_source=internalbl&amp;utm_medium=click&amp;utm_campaign=ATLinks"
-                                                                        target="_blank">
-                                                        Tuy
-                                                        Hòa
-                                                    </a>. Trên đường,
-                                                    đoàn tham quan:<br>
-                                                    <br>
-                                                    <strong>
-                                                        - <a href="https://travel.com.vn/phu-yen/tour-ganhdadia-01.aspx?utm_source=internalbl&amp;utm_medium=click&amp;utm_campaign=ATLinks"
-                                                             target="_blank">
-                                                            Gành
-                                                            Đá Dĩa
-                                                        </a>:
-                                                    </strong>Thắng cảnh độc
-                                                    nhất vô nhị của tỉnh Phú
-                                                    Yên và của Quốc Gia. Đến
-                                                    đây, Quý khách còn được
-                                                    tham quan Bảo tàng đá cổ
-                                                    với bộ sưu tầm đá và các
-                                                    bộ cồng chiêng của đồng
-                                                    bào còn lưu giữ nguyên
-                                                    vẹn. Quý khách có thể
-                                                    chụp hình cùng guồng
-                                                    nước, đồi hoa vàng thơ
-                                                    mộng và thưởng thức tiết
-                                                    mục đàn đá hấp dẫn từ
-                                                    đồng bào địa phương.<br>
-                                                    <br>
-                                                    <strong>
-                                                        - <a href="https://travel.com.vn/phu-yen/tour-manglang-01.aspx?utm_source=internalbl&amp;utm_medium=click&amp;utm_campaign=ATLinks"
-                                                             target="_blank">
-                                                            Nhà
-                                                            Thờ Mằng Lăng
-                                                        </a>:
-                                                    </strong>Nơi lưu giữ
-                                                    cuốn kinh thánh bằng chữ
-                                                    Quốc Ngữ đầu tiên của
-                                                    Việt Nam.<br>
-                                                    <br>
-                                                    Đoàn ăn tối và trở về
-                                                    khách sạn nhận phòn. Tự
-                                                    do khám phá thành phố
-                                                    Quy Nhơn về đêm, ghé
-                                                    Suff Bar tận hưởng cảm
-                                                    giác chill giữa bãi biển
-                                                    với ly cocktail hay cà
-                                                    phê đắng ngọt.<br>
-                                                    <br>
-                                                    <strong>
-                                                        Nghỉ đêm tại Quy
-                                                        Nhơn
-                                                    </strong><br>
+                                                    - @Html.DisplayFor(model => model.LichTrinh.Moc2)
+                                                    <br />
                                                     &nbsp;
                                                 </div>
                                             </div>
@@ -570,7 +328,7 @@
                                                 <i class="icon
                                                         icon--calendar"></i>
                                                 <label>Khách sạn</label>
-                                                <p>VinOasis Phú Quốc</p>
+                                                <p> @Html.DisplayFor(model => model.KSan.TenKhachSan)</p>
                                             </div>
                                             <div class="item">
                                                 <i class="icon icon--fire"></i>
@@ -586,72 +344,17 @@
                                     </div>
                                     <div>
                                         <h2 id="day-03">
-                                            Ngày 3 - QUY NHƠN -
-                                            TP.HỒ CHÍ MINH Số bữa ăn: 02 bữa
-                                            (sáng, trưa)
+                                            @Html.DisplayFor(model => model.LichTrinh.Moc3)
                                         </h2>
                                         <div class="excerpt">
                                             <span class="line"></span>
-                                            <title></title>
+
 
 
                                             <div style="text-align:justify">
                                                 <div>
-                                                    Dùng bữa sáng tại khách
-                                                    sạn. Quý khách làm thủ
-                                                    tục trả phòng và xe đưa
-                                                    đoàn đi tham quan:<br>
+                                                    - @Html.DisplayFor(model => model.LichTrinh.Moc3)
                                                     <br>
-                                                    <strong>
-                                                        - <a href="https://travel.com.vn/qui-nhon/tour-eogio-qn.aspx?utm_source=internalbl&amp;utm_medium=click&amp;utm_campaign=ATLinks"
-                                                             target="_blank">
-                                                            Eo
-                                                            Gió
-                                                        </a>:
-                                                    </strong>Nơi vẫn còn giữ
-                                                    được cho mình vẻ đẹp tự
-                                                    nhiên đầy hoang sơ. Đứng
-                                                    từ trên cao nhìn xuống,
-                                                    Eo Gió như một bức tranh
-                                                    sơn thủy hữu tình với
-                                                    trời, mây, nước… biển
-                                                    núi ôm nhau vừa gợi cảm,
-                                                    vừa hoang sơ đầy quyến
-                                                    rũ.&nbsp;<br>
-                                                    <br>
-                                                    - Trên đường đi Quý
-                                                    khách sẽ được chiêm
-                                                    ngưỡng cây cầu vượt biển
-                                                    dài nhất Việt Nam –
-                                                    <strong>
-                                                        Cầu Thị Nại
-                                                    </strong>nằm trong hệ
-                                                    thống cầu đường Nhơn Hội
-                                                    dài gần 7 km nối thành
-                                                    phố Quy Nhơn với bán đảo
-                                                    Phương Mai. Từ nơi này
-                                                    du khách có thể thưởng
-                                                    ngoạn trọn vẹn phong
-                                                    cảnh của đầm Thị Nại với
-                                                    nhiều góc độ khác nhau.<br>
-                                                    <br>
-                                                    - Dừng chân chụp hình
-                                                    tại chân núi <strong>
-                                                        Chùa
-                                                        Linh Phong (Chùa Ông
-                                                        Núi)
-                                                    </strong> check
-                                                    in tượng phật ngồi 69m
-                                                    cao nhất Đông Nam Á hiện
-                                                    nay.<br>
-                                                    <br>
-                                                    Quý khách dùng bữa trưa.
-                                                    Sau đó, đoàn đón chuyến
-                                                    bay về lại TP.HCM. Đến
-                                                    sân bay Tân Sơn Nhất,
-                                                    chia tay và kết thúc
-                                                    chương trình nhiều trải
-                                                    nghiệm.<br>
                                                     &nbsp;
                                                 </div>
                                             </div>
@@ -664,7 +367,43 @@
                                                 <i class="icon
                                                         icon--calendar"></i>
                                                 <label>Khách sạn</label>
-                                                <p>VinOasis Phú Quốc</p>
+                                                <p> @Html.DisplayFor(model => model.KSan.TenKhachSan)</p>
+                                            </div>
+                                            <div class="item">
+                                                <i class="icon icon--fire"></i>
+                                                <label>Bữa ăn</label>
+                                                <p>1 bửa trưa, 1 bửa tối.</p>
+                                            </div>
+                                            <div class="item">
+                                                <i class="icon icon--map"></i>
+                                                <label>Điểm tham quan</label>
+                                                <p>1 địa điểm</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h2 id="day-01">
+                                            @Html.DisplayFor(model => model.LichTrinh.Moc4)
+                                        </h2>
+                                        <div class="excerpt">
+                                            <span class="line"></span>
+
+                                            <div style="text-align:justify">
+                                                <div>
+                                                    -  @Html.DisplayFor(model => model.LichTrinh.CTMoc4)
+                                                    &nbsp;
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="group-services hashCode
+                                                d-none">
+                                            <div class="item">
+                                                <i class="icon
+                                                        icon--calendar"></i>
+                                                <label>Khách sạn</label>
+                                                <p> @Html.DisplayFor(model => model.KSan.TenKhachSan)</p>
                                             </div>
                                             <div class="item">
                                                 <i class="icon icon--fire"></i>
@@ -729,7 +468,7 @@
                                                     goto ">
                                                 <div class="date">
                                                     <span>Ngày đi -</span>
-                                                    <b>19/10/2022 </b>
+                                                    <b>@Html.DisplayFor(model => model.MayBay.GioDi) </b>
                                                 </div>
                                                 <div class="from">
                                                     <h4>
@@ -763,14 +502,14 @@
                                                 </div>
                                                 <div class="cb">
                                                     <h3>Chuyến bay</h3>
-                                                    <p>VU450</p>
+                                                    <p>@Html.DisplayFor(model => model.MayBay.TenChuyenBay)</p>
                                                 </div>
                                             </div>
                                             <div class="detail-tour-inner
                                                     comeback">
                                                 <div class="date">
                                                     <span>Ngày về -</span>
-                                                    <b>21/10/2022</b>
+                                                    <b>@Html.DisplayFor(model => model.MayBay.GIoDen)</b>
                                                 </div>
                                                 <div class="from">
                                                     <h4>
@@ -804,7 +543,7 @@
                                                 </div>
                                                 <div class="cb">
                                                     <h3>Chuyến bay</h3>
-                                                    <p>VU451</p>
+                                                    <p>@Html.DisplayFor(model => model.MayBay.TenChuyenBay)</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -851,7 +590,7 @@
                                                         tuổi trở lên)
                                                     </td>
                                                     <td class="t-price">
-                                                        4,090,000
+                                                        @Html.DisplayFor(model => model.GiaNguoiLon)
                                                         đ
                                                     </td>
                                                     <td class="l-price">0 đ</td>
@@ -862,33 +601,12 @@
                                                         tuổi)
                                                     </td>
                                                     <td class="t-price">
-                                                        3,442,500
+                                                        @Html.DisplayFor(model => model.GiaTreEm)
                                                         đ
                                                     </td>
                                                     <td class="l-price">0 đ</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        Trẻ nhỏ (Từ 2 - 4
-                                                        tuổi)
-                                                    </td>
-                                                    <td class="t-price">
-                                                        1,600,000
-                                                        đ
-                                                    </td>
-                                                    <td class="l-price">0 đ</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Em bé ( Dưới 2 tuổi
-                                                        )
-                                                    </td>
-                                                    <td class="t-price">
-                                                        250,000
-                                                        đ
-                                                    </td>
-                                                    <td class="l-price">0 đ</td>
-                                                </tr>
+
                                                 <tr class="total">
                                                     <td>Phụ thu phòng đơn</td>
                                                     <td class="t-price">
@@ -912,19 +630,11 @@
                                                 <div id="divThongTinHDV">
                                                     <div class="info"
                                                          style="width:100%">
-                                                        <p>Đang cập nhật</p>
+                                                        <p><b>@Html.DisplayFor(model => model.HuongDanVien.TenHDV)</b></p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="block">
-                                                <span>HDV tiễn</span>
-                                                <div id="divThongTinHDVTien">
-                                                    <div class="info"
-                                                         style="width:100%">
-                                                        <p>Đang cập nhật</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -951,3 +661,14 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    .image2 {
+        margin:20px;    
+    }
+</style>

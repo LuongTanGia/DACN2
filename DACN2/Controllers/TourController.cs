@@ -26,12 +26,27 @@ namespace DACN2.Controllers
 
        
         public ActionResult Create()
-        {           
-            return View();
+        {
+            Tour Tour = new Tour();            
+            Tour.LoaiTours = data.LoaiTours.ToList();
+            Tour.LoaiKsan = data.KSans.ToList();
+            Tour.HuongDanViens = data.HuongDanViens.ToList();
+            Tour.MayBays = data.MayBays.ToList();
+            Tour.DiaDiems = data.DiaDiems.ToList();
+            Tour.LichTrinhs = data.LichTrinhs.ToList();
+            return View(Tour);
+            
         }
         [HttpPost]
         public ActionResult Create(FormCollection collection, Tour s)
         {
+            s.LoaiTours = data.LoaiTours.ToList();
+            s.LoaiKsan = data.KSans.ToList();
+            s.HuongDanViens = data.HuongDanViens.ToList();
+            s.MayBays = data.MayBays.ToList();
+            s.DiaDiems = data.DiaDiems.ToList();
+            s.LichTrinhs = data.LichTrinhs.ToList();
+
             var E_TenTour = collection["TenTour"];
             var E_Gia = Convert.ToInt32(collection["Gia"]);
             var E_NgayKhoiHanh = Convert.ToDateTime(collection["NgayKhoiHanh"]);
@@ -39,12 +54,22 @@ namespace DACN2.Controllers
             var E_SoCho = Convert.ToInt32(collection["SoCho"]);
             var E_NoiDung = collection["NoiDung"];
             var E_ChiTietTour = collection["ChiTietTour"];
-            /*var E_MaTour = collection["MaTour"];*/
+            var E_MaLoaiTour = int.Parse(Request.Form["MaLoaiTour"]);
+            var E_MaKS = int.Parse(Request.Form["MaKS"]);
+            var E_MaTour = collection["MaTour"];
             var E_Hinh = collection["Hinh"];
-            /*var E_MaDiaDiem = Convert.ToInt32(collection["MaDiaDiem"]);
-            var E_MaKS = Convert.ToInt32(collection["MaKS"]);
-            var E_MaMayBay = Convert.ToInt32(collection["MaMayBay"]);
-            var E_IDHDV = Convert.ToInt32(collection["IDHDV"]);*/
+            var E_MaDiaDiem = int.Parse(Request.Form["MaDiaDiem"]);
+            var E_MaMayBay = int.Parse(Request.Form["MaMayBay"]);
+            var E_IDHDV = int.Parse(Request.Form["IDHDV"]);
+            /*--------*/
+            var E_NoiKhoiHanh = collection["NoiKhoiHanh"];
+            var E_MaLichTrinh = int.Parse(Request.Form["MaLichTrinh"]);
+            var E_GiaNguoiLon = Convert.ToDecimal(collection["GiaNguoiLon"]);
+            var E_GiaTreEm = Convert.ToDecimal(collection["GiaTreEm"]);
+            var E_ThoiGian = collection["ThoiGian"];
+            var E_Hinh2 = collection["Hinh2"];
+            var E_Hinh3 = collection["Hinh3"];
+           
             if (string.IsNullOrEmpty(E_TenTour))
             {
                 ViewData["Error"] = "Don't empty!";
@@ -58,12 +83,22 @@ namespace DACN2.Controllers
                 s.SoCho = E_SoCho;
                 s.NoiDung = E_NoiDung.ToString();
                 s.ChiTietTour = E_ChiTietTour.ToString();
-                /*s.MaTour = E_MaTour;*/
+                s.MaLoaiTour = E_MaLoaiTour;
+                s.MaTour = E_MaTour;
                 s.Hinh = E_Hinh.ToString();
-                /*s.MaDiaDiem = E_MaDiaDiem;
                 s.MaKS = E_MaKS;
+                s.MaDiaDiem = E_MaDiaDiem;
                 s.MaMayBay = E_MaMayBay;
-                s.IDHDV = E_IDHDV;*/
+                s.IDHDV = E_IDHDV;
+                /*--------*/
+                s.NoiKhoiHanh = E_NoiKhoiHanh.ToString();
+                s.MaLichTrinh = E_MaLichTrinh;
+                s.GiaNguoiLon = E_GiaNguoiLon;
+                s.GiaTreEm = E_GiaTreEm;
+                s.ThoiGian = E_ThoiGian.ToString();
+                s.Hinh2 = E_Hinh2.ToString();
+                s.Hinh3 = E_Hinh3.ToString();
+              
                 data.Tours.InsertOnSubmit(s);
                 data.SubmitChanges();
                 return RedirectToAction("Index");

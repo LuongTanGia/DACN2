@@ -50,6 +50,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -131,6 +132,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyData.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Tour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2203,11 +2205,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Models\MyData.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>MyData.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\fontawesome-free-6.2.0-web\less\brands.less" />
     <Content Include="Content\fontawesome-free-6.2.0-web\less\fontawesome.less" />
     <Content Include="Content\fontawesome-free-6.2.0-web\less\regular.less" />
@@ -2261,6 +2258,11 @@
     <Content Include="Content\fontawesome-free-6.2.0-web\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\fontawesome-free-6.2.0-web\webfonts\fa-v4compatibility.ttf" />
     <Content Include="Content\fontawesome-free-6.2.0-web\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="Models\MyData.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>MyData.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Models\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
@@ -2295,6 +2297,8 @@
     <Content Include="Views\Tour\Index.cshtml" />
     <Content Include="Views\Tour\Detail.cshtml" />
     <Content Include="Views\Tour\Create.cshtml" />
+    <Content Include="Views\Tour\Edit.cshtml" />
+    <Content Include="Views\Tour\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
