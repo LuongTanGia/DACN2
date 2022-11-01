@@ -120,7 +120,30 @@
                                         </div>
                                         <div class="panel-footer clearfix">
                                             <div class="pull-right">
-                                                <a class="btn btn-default" href="@Url.Action("Detail", "Tour",new { @id = item.ID})">Thong Tin</a>
+                                                <div class="DatMua">
+                                                    @if (item.SoCho > 0)
+                                                    {
+                                                        <a class="btn btn-success"
+                                                           href="@Url.Action("ThemGioHang", "GioHang", new
+                                                     {
+                                                              @id = item.ID,
+                                                                @strURL = Request.Url.ToString()
+                                                        })">Thêm vào giỏ</a>
+                                                        <a class="btn btn-default" href="@Url.Action("Detail", "Tour",new { @id = item.ID})">Thong Tin</a>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="btn  btn-warning ">
+                                                            Tạm Hết Hàng
+                                                        </a>
+                                                        <a class="btn btn-default" href="@Url.Action("Detail", "Tour",new { @id = item.ID})">Thong Tin</a>
+
+
+                                                    }
+                                                    @*<a class="btn btn-default" href="@Url.Action("Detail", "Giay",new { @id = item.magiay})">Thong Tin</a>
+            <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang",new { @id = item.magiay, @strURL = Request.Url.ToString() })">Đặt mua</a>*@
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

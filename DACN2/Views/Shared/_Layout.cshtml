@@ -23,11 +23,32 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Tour")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("GioHang", "GioHang", "GioHang")</li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Session["TaiKhoan"] != null)
+                    {
+                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-user"></i> </a></li>
+                        <li>@Html.Partial("~/Views/GioHang/Ten.cshtml")</li>
+                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-right-from-bracket"></i> </a></li>
+                        <li>@Html.ActionLink("Đăng Xuất", "DangXuat", "KhachHang")</li>
+
+                    }
+                    else
+                    {
+                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-user"></i> </a></li>
+                        <li>@Html.ActionLink("Đăng Ký", "Dangky", "KhachHang")</li>
+                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-right-to-bracket"></i></a></li>
+                        <li>@Html.ActionLink("Đăng Nhập", "DangNhap", "KhachHang")</li>
+                    }
+                    @*<li>@Html.ActionLink("Dang Ky", "DangKy", "NguoiDung")</li>
+            <li>@Html.ActionLink("Dang Nhap", "DangNhap", "NguoiDung")</li>*@
                 </ul>
             </div>
+
         </div>
     </div>
     <div class="container body-content">
