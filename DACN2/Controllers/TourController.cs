@@ -106,6 +106,97 @@ namespace DACN2.Controllers
 
             return this.Create();
         }
+        public ActionResult Edit(int id)
+        {
+
+           
+            var D_tour = data.Tours.FirstOrDefault(m => m.ID == id);
+            
+            D_tour.LoaiTours = data.LoaiTours.ToList();
+            D_tour.LoaiKsan = data.KSans.ToList();
+            D_tour.HuongDanViens = data.HuongDanViens.ToList();
+            D_tour.MayBays = data.MayBays.ToList();
+            D_tour.DiaDiems = data.DiaDiems.ToList();
+            D_tour.LichTrinhs = data.LichTrinhs.ToList();
+            return View(D_tour);
+        }
+        [HttpPost]
+        public ActionResult Edit(FormCollection collection, int id)
+        {
+            
+            /*s.LoaiTours = data.LoaiTours.ToList();*/
+            var D_tour = data.Tours.First(m => m.ID == id);
+            D_tour.LoaiTours = data.LoaiTours.ToList();
+            D_tour.LoaiKsan = data.KSans.ToList();
+            D_tour.HuongDanViens = data.HuongDanViens.ToList();
+            D_tour.MayBays = data.MayBays.ToList();
+            D_tour.DiaDiems = data.DiaDiems.ToList();
+            D_tour.LichTrinhs = data.LichTrinhs.ToList();
+            var E_TenTour = collection["TenTour"];
+            var E_Gia = Convert.ToDecimal(collection["Gia"]);
+            var E_NgayKhoiHanh = Convert.ToDateTime(collection["NgayKhoiHanh"]);
+            var E_NgayKetThuc = Convert.ToDateTime(collection["NgayKetThuc"]);
+            var E_SoCho = Convert.ToInt32(collection["SoCho"]);
+            var E_NoiDung = collection["NoiDung"];
+            var E_ChiTietTour = collection["ChiTietTour"];
+            var E_MaLoaiTour = int.Parse(Request.Form["MaLoaiTour"]);
+            var E_MaKS = int.Parse(collection["MaKS"]);
+            var E_MaTour = collection["MaTour"];
+            var E_Hinh = collection["Hinh"];
+            var E_MaDiaDiem = Convert.ToInt32(collection["MaDiaDiem"]);
+            var E_MaMayBay = Convert.ToInt32(collection["MaMayBay"]);
+            var E_IDHDV = Convert.ToInt32(collection["IDHDV"]);
+            /*--------*/
+            var E_NoiKhoiHanh = collection["NoiKhoiHanh"];
+            var E_MaLichTrinh = int.Parse(Request.Form["MaLichTrinh"]);
+            var E_GiaNguoiLon = Convert.ToDecimal(collection["GiaNguoiLon"]);
+            var E_GiaTreEm = Convert.ToDecimal(collection["GiaTreEm"]);
+            var E_ThoiGian = collection["ThoiGian"];
+            var E_Hinh2 = collection["Hinh2"];
+            var E_Hinh3 = collection["Hinh3"];
+/*            var E_Hinh4 = collection["Hinh4"];*/
+            D_tour.ID = id;
+
+            if (string.IsNullOrEmpty(E_TenTour))
+            {
+                ViewData["Error"] = "Don't empty!";
+            }
+            else
+            {
+                D_tour.TenTour = E_TenTour.ToString();
+                D_tour.Gia = E_Gia;
+                D_tour.NgayKhoiHanh = E_NgayKhoiHanh;
+                D_tour.NgayKetThuc = E_NgayKetThuc;
+                D_tour.SoCho = E_SoCho;
+                D_tour.NoiDung = E_NoiDung.ToString();
+                D_tour.ChiTietTour = E_ChiTietTour.ToString();
+                D_tour.MaLoaiTour = E_MaLoaiTour;
+                D_tour.MaTour = E_MaTour;
+                D_tour.Hinh = E_Hinh.ToString();
+                D_tour.MaKS = E_MaKS;
+                D_tour.MaDiaDiem = E_MaDiaDiem;
+                D_tour.MaMayBay = E_MaMayBay;
+                D_tour.IDHDV = E_IDHDV;
+                /*--------*/
+                D_tour.NoiKhoiHanh = E_NoiKhoiHanh.ToString();
+                D_tour.MaLichTrinh = E_MaLichTrinh;
+                D_tour.GiaNguoiLon = E_GiaNguoiLon;
+                D_tour.GiaTreEm = E_GiaTreEm;
+                D_tour.ThoiGian = E_ThoiGian.ToString();
+                D_tour.Hinh2 = E_Hinh2.ToString();
+                D_tour.Hinh3 = E_Hinh3.ToString();
+                /*D_tour.Hinh4 = E_Hinh4.ToString();*/
+
+                UpdateModel(D_tour);
+
+
+                data.SubmitChanges();
+                return RedirectToAction("Index");
+            }
+
+            return this.Edit(id);
+        }
+
 
         public string ProcessUpload(HttpPostedFileBase file)
         {
