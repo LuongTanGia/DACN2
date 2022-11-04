@@ -214,13 +214,15 @@ namespace DACN2.Models
 		
 		private int _ID;
 		
-		private System.Nullable<int> _MaKhachHang;
+		private int _MaDatTour;
 		
-		private System.Nullable<int> _MaDatTour;
+		private System.Nullable<int> _SoCho;
+		
+		private System.Nullable<decimal> _Gia;
+		
+		private EntityRef<Tour> _Tour;
 		
 		private EntityRef<DatTour> _DatTour;
-		
-		private EntityRef<KhachHang> _KhachHang;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -228,20 +230,22 @@ namespace DACN2.Models
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnMaKhachHangChanging(System.Nullable<int> value);
-    partial void OnMaKhachHangChanged();
-    partial void OnMaDatTourChanging(System.Nullable<int> value);
+    partial void OnMaDatTourChanging(int value);
     partial void OnMaDatTourChanged();
+    partial void OnSoChoChanging(System.Nullable<int> value);
+    partial void OnSoChoChanged();
+    partial void OnGiaChanging(System.Nullable<decimal> value);
+    partial void OnGiaChanged();
     #endregion
 		
 		public ChiTietDatTour()
 		{
+			this._Tour = default(EntityRef<Tour>);
 			this._DatTour = default(EntityRef<DatTour>);
-			this._KhachHang = default(EntityRef<KhachHang>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int ID
 		{
 			get
@@ -252,6 +256,10 @@ namespace DACN2.Models
 			{
 				if ((this._ID != value))
 				{
+					if (this._Tour.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnIDChanging(value);
 					this.SendPropertyChanging();
 					this._ID = value;
@@ -261,32 +269,8 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaKhachHang", DbType="Int")]
-		public System.Nullable<int> MaKhachHang
-		{
-			get
-			{
-				return this._MaKhachHang;
-			}
-			set
-			{
-				if ((this._MaKhachHang != value))
-				{
-					if (this._KhachHang.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaKhachHangChanging(value);
-					this.SendPropertyChanging();
-					this._MaKhachHang = value;
-					this.SendPropertyChanged("MaKhachHang");
-					this.OnMaKhachHangChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDatTour", DbType="Int")]
-		public System.Nullable<int> MaDatTour
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaDatTour", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaDatTour
 		{
 			get
 			{
@@ -305,6 +289,80 @@ namespace DACN2.Models
 					this._MaDatTour = value;
 					this.SendPropertyChanged("MaDatTour");
 					this.OnMaDatTourChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SoCho", DbType="Int")]
+		public System.Nullable<int> SoCho
+		{
+			get
+			{
+				return this._SoCho;
+			}
+			set
+			{
+				if ((this._SoCho != value))
+				{
+					this.OnSoChoChanging(value);
+					this.SendPropertyChanging();
+					this._SoCho = value;
+					this.SendPropertyChanged("SoCho");
+					this.OnSoChoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gia", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> Gia
+		{
+			get
+			{
+				return this._Gia;
+			}
+			set
+			{
+				if ((this._Gia != value))
+				{
+					this.OnGiaChanging(value);
+					this.SendPropertyChanging();
+					this._Gia = value;
+					this.SendPropertyChanged("Gia");
+					this.OnGiaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tour_ChiTietDatTour", Storage="_Tour", ThisKey="ID", OtherKey="ID", IsForeignKey=true)]
+		public Tour Tour
+		{
+			get
+			{
+				return this._Tour.Entity;
+			}
+			set
+			{
+				Tour previousValue = this._Tour.Entity;
+				if (((previousValue != value) 
+							|| (this._Tour.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Tour.Entity = null;
+						previousValue.ChiTietDatTours.Remove(this);
+					}
+					this._Tour.Entity = value;
+					if ((value != null))
+					{
+						value.ChiTietDatTours.Add(this);
+						this._ID = value.ID;
+					}
+					else
+					{
+						this._ID = default(int);
+					}
+					this.SendPropertyChanged("Tour");
 				}
 			}
 		}
@@ -336,43 +394,9 @@ namespace DACN2.Models
 					}
 					else
 					{
-						this._MaDatTour = default(Nullable<int>);
+						this._MaDatTour = default(int);
 					}
 					this.SendPropertyChanged("DatTour");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KhachHang_ChiTietDatTour", Storage="_KhachHang", ThisKey="MaKhachHang", OtherKey="MaKhachHang", IsForeignKey=true)]
-		public KhachHang KhachHang
-		{
-			get
-			{
-				return this._KhachHang.Entity;
-			}
-			set
-			{
-				KhachHang previousValue = this._KhachHang.Entity;
-				if (((previousValue != value) 
-							|| (this._KhachHang.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._KhachHang.Entity = null;
-						previousValue.ChiTietDatTours.Remove(this);
-					}
-					this._KhachHang.Entity = value;
-					if ((value != null))
-					{
-						value.ChiTietDatTours.Add(this);
-						this._MaKhachHang = value.MaKhachHang;
-					}
-					else
-					{
-						this._MaKhachHang = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("KhachHang");
 				}
 			}
 		}
@@ -450,7 +474,7 @@ namespace DACN2.Models
 		
 		private string _Hinh4;
 		
-		private EntitySet<DatTour> _DatTours;
+		private EntitySet<ChiTietDatTour> _ChiTietDatTours;
 		
 		private EntityRef<DiaDiem> _DiaDiem;
 		
@@ -518,7 +542,7 @@ namespace DACN2.Models
 		
 		public Tour()
 		{
-			this._DatTours = new EntitySet<DatTour>(new Action<DatTour>(this.attach_DatTours), new Action<DatTour>(this.detach_DatTours));
+			this._ChiTietDatTours = new EntitySet<ChiTietDatTour>(new Action<ChiTietDatTour>(this.attach_ChiTietDatTours), new Action<ChiTietDatTour>(this.detach_ChiTietDatTours));
 			this._DiaDiem = default(EntityRef<DiaDiem>);
 			this._HuongDanVien = default(EntityRef<HuongDanVien>);
 			this._KSan = default(EntityRef<KSan>);
@@ -648,7 +672,7 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoiDung", DbType="NVarChar(1000)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoiDung", DbType="NVarChar(2000)")]
 		public string NoiDung
 		{
 			get
@@ -1012,16 +1036,16 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tour_DatTour", Storage="_DatTours", ThisKey="ID", OtherKey="MaTour")]
-		public EntitySet<DatTour> DatTours
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tour_ChiTietDatTour", Storage="_ChiTietDatTours", ThisKey="ID", OtherKey="ID")]
+		public EntitySet<ChiTietDatTour> ChiTietDatTours
 		{
 			get
 			{
-				return this._DatTours;
+				return this._ChiTietDatTours;
 			}
 			set
 			{
-				this._DatTours.Assign(value);
+				this._ChiTietDatTours.Assign(value);
 			}
 		}
 		
@@ -1249,13 +1273,13 @@ namespace DACN2.Models
 			}
 		}
 		
-		private void attach_DatTours(DatTour entity)
+		private void attach_ChiTietDatTours(ChiTietDatTour entity)
 		{
 			this.SendPropertyChanging();
 			entity.Tour = this;
 		}
 		
-		private void detach_DatTours(DatTour entity)
+		private void detach_ChiTietDatTours(ChiTietDatTour entity)
 		{
 			this.SendPropertyChanging();
 			entity.Tour = null;
@@ -1272,15 +1296,11 @@ namespace DACN2.Models
 		
 		private System.Nullable<System.DateTime> _NgayDat;
 		
-		private System.Nullable<int> _SoCho;
-		
-		private System.Nullable<int> _ThanhTien;
-		
-		private System.Nullable<int> _MaTour;
+		private System.Nullable<int> _MaKhachHang;
 		
 		private EntitySet<ChiTietDatTour> _ChiTietDatTours;
 		
-		private EntityRef<Tour> _Tour;
+		private EntityRef<KhachHang> _KhachHang;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1290,18 +1310,14 @@ namespace DACN2.Models
     partial void OnMaDatTourChanged();
     partial void OnNgayDatChanging(System.Nullable<System.DateTime> value);
     partial void OnNgayDatChanged();
-    partial void OnSoChoChanging(System.Nullable<int> value);
-    partial void OnSoChoChanged();
-    partial void OnThanhTienChanging(System.Nullable<int> value);
-    partial void OnThanhTienChanged();
-    partial void OnMaTourChanging(System.Nullable<int> value);
-    partial void OnMaTourChanged();
+    partial void OnMaKhachHangChanging(System.Nullable<int> value);
+    partial void OnMaKhachHangChanged();
     #endregion
 		
 		public DatTour()
 		{
 			this._ChiTietDatTours = new EntitySet<ChiTietDatTour>(new Action<ChiTietDatTour>(this.attach_ChiTietDatTours), new Action<ChiTietDatTour>(this.detach_ChiTietDatTours));
-			this._Tour = default(EntityRef<Tour>);
+			this._KhachHang = default(EntityRef<KhachHang>);
 			OnCreated();
 		}
 		
@@ -1325,7 +1341,7 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NgayDat", DbType="Date")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NgayDat", DbType="DateTime")]
 		public System.Nullable<System.DateTime> NgayDat
 		{
 			get
@@ -1345,66 +1361,26 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SoCho", DbType="Int")]
-		public System.Nullable<int> SoCho
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaKhachHang", DbType="Int")]
+		public System.Nullable<int> MaKhachHang
 		{
 			get
 			{
-				return this._SoCho;
+				return this._MaKhachHang;
 			}
 			set
 			{
-				if ((this._SoCho != value))
+				if ((this._MaKhachHang != value))
 				{
-					this.OnSoChoChanging(value);
-					this.SendPropertyChanging();
-					this._SoCho = value;
-					this.SendPropertyChanged("SoCho");
-					this.OnSoChoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThanhTien", DbType="Int")]
-		public System.Nullable<int> ThanhTien
-		{
-			get
-			{
-				return this._ThanhTien;
-			}
-			set
-			{
-				if ((this._ThanhTien != value))
-				{
-					this.OnThanhTienChanging(value);
-					this.SendPropertyChanging();
-					this._ThanhTien = value;
-					this.SendPropertyChanged("ThanhTien");
-					this.OnThanhTienChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTour", DbType="Int")]
-		public System.Nullable<int> MaTour
-		{
-			get
-			{
-				return this._MaTour;
-			}
-			set
-			{
-				if ((this._MaTour != value))
-				{
-					if (this._Tour.HasLoadedOrAssignedValue)
+					if (this._KhachHang.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnMaTourChanging(value);
+					this.OnMaKhachHangChanging(value);
 					this.SendPropertyChanging();
-					this._MaTour = value;
-					this.SendPropertyChanged("MaTour");
-					this.OnMaTourChanged();
+					this._MaKhachHang = value;
+					this.SendPropertyChanged("MaKhachHang");
+					this.OnMaKhachHangChanged();
 				}
 			}
 		}
@@ -1422,36 +1398,36 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tour_DatTour", Storage="_Tour", ThisKey="MaTour", OtherKey="ID", IsForeignKey=true)]
-		public Tour Tour
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KhachHang_DatTour", Storage="_KhachHang", ThisKey="MaKhachHang", OtherKey="MaKhachHang", IsForeignKey=true)]
+		public KhachHang KhachHang
 		{
 			get
 			{
-				return this._Tour.Entity;
+				return this._KhachHang.Entity;
 			}
 			set
 			{
-				Tour previousValue = this._Tour.Entity;
+				KhachHang previousValue = this._KhachHang.Entity;
 				if (((previousValue != value) 
-							|| (this._Tour.HasLoadedOrAssignedValue == false)))
+							|| (this._KhachHang.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Tour.Entity = null;
+						this._KhachHang.Entity = null;
 						previousValue.DatTours.Remove(this);
 					}
-					this._Tour.Entity = value;
+					this._KhachHang.Entity = value;
 					if ((value != null))
 					{
 						value.DatTours.Add(this);
-						this._MaTour = value.ID;
+						this._MaKhachHang = value.MaKhachHang;
 					}
 					else
 					{
-						this._MaTour = default(Nullable<int>);
+						this._MaKhachHang = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("Tour");
+					this.SendPropertyChanged("KhachHang");
 				}
 			}
 		}
@@ -1974,7 +1950,7 @@ namespace DACN2.Models
 		
 		private System.Nullable<int> _CMND;
 		
-		private EntitySet<ChiTietDatTour> _ChiTietDatTours;
+		private EntitySet<DatTour> _DatTours;
 		
 		private EntitySet<PhanHoi> _PhanHois;
 		
@@ -2004,7 +1980,7 @@ namespace DACN2.Models
 		
 		public KhachHang()
 		{
-			this._ChiTietDatTours = new EntitySet<ChiTietDatTour>(new Action<ChiTietDatTour>(this.attach_ChiTietDatTours), new Action<ChiTietDatTour>(this.detach_ChiTietDatTours));
+			this._DatTours = new EntitySet<DatTour>(new Action<DatTour>(this.attach_DatTours), new Action<DatTour>(this.detach_DatTours));
 			this._PhanHois = new EntitySet<PhanHoi>(new Action<PhanHoi>(this.attach_PhanHois), new Action<PhanHoi>(this.detach_PhanHois));
 			OnCreated();
 		}
@@ -2189,16 +2165,16 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KhachHang_ChiTietDatTour", Storage="_ChiTietDatTours", ThisKey="MaKhachHang", OtherKey="MaKhachHang")]
-		public EntitySet<ChiTietDatTour> ChiTietDatTours
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KhachHang_DatTour", Storage="_DatTours", ThisKey="MaKhachHang", OtherKey="MaKhachHang")]
+		public EntitySet<DatTour> DatTours
 		{
 			get
 			{
-				return this._ChiTietDatTours;
+				return this._DatTours;
 			}
 			set
 			{
-				this._ChiTietDatTours.Assign(value);
+				this._DatTours.Assign(value);
 			}
 		}
 		
@@ -2235,13 +2211,13 @@ namespace DACN2.Models
 			}
 		}
 		
-		private void attach_ChiTietDatTours(ChiTietDatTour entity)
+		private void attach_DatTours(DatTour entity)
 		{
 			this.SendPropertyChanging();
 			entity.KhachHang = this;
 		}
 		
-		private void detach_ChiTietDatTours(ChiTietDatTour entity)
+		private void detach_DatTours(DatTour entity)
 		{
 			this.SendPropertyChanging();
 			entity.KhachHang = null;
@@ -2332,7 +2308,7 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Diachi", DbType="VarChar(100)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Diachi", DbType="NVarChar(100)")]
 		public string Diachi
 		{
 			get
@@ -2518,7 +2494,7 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CTMoc1", DbType="NVarChar(1000)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CTMoc1", DbType="NVarChar(2000)")]
 		public string CTMoc1
 		{
 			get
@@ -2558,7 +2534,7 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CTMoc2", DbType="NVarChar(1000)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CTMoc2", DbType="NVarChar(2000)")]
 		public string CTMoc2
 		{
 			get
@@ -2598,7 +2574,7 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CTMoc3", DbType="NVarChar(1000)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CTMoc3", DbType="NVarChar(2000)")]
 		public string CTMoc3
 		{
 			get
@@ -2638,7 +2614,7 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CTMoc4", DbType="NVarChar(1000)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CTMoc4", DbType="NVarChar(2000)")]
 		public string CTMoc4
 		{
 			get
@@ -2926,7 +2902,7 @@ namespace DACN2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenChuyenBay", DbType="NChar(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenChuyenBay", DbType="NChar(20)")]
 		public string TenChuyenBay
 		{
 			get

@@ -66,8 +66,6 @@ namespace DACN2.Controllers
                 {
                     kh.MaKhachHang = MaKhachHang;
                     kh.Ten = Ten;
-                    kh.TenDangNhap = TenDangNhap;
-                    kh.MatKhau = MatKhau;
                     kh.Email = Email;
                     kh.DiaChi = DiaChi;
                     kh.SDT = SDT;
@@ -107,102 +105,102 @@ namespace DACN2.Controllers
             return View();
         }
 
- /*       public ActionResult Nhom()
-        {
-            return PartialView();
-        }
-        public ActionResult forgotpass()
-        {
-            return View();
-        }
-        public ActionResult DangXuat()
-        {
-            Session.Clear();
-            return RedirectToAction("DangNhap");
-        }
+        /*       public ActionResult Nhom()
+               {
+                   return PartialView();
+               }
+               public ActionResult forgotpass()
+               {
+                   return View();
+               }
+               public ActionResult DangXuat()
+               {
+                   Session.Clear();
+                   return RedirectToAction("DangNhap");
+               }
 
-        public ActionResult profile(int id)
-        {
-            KhachHang kh = (KhachHang)Session["Taikhoan"];
-            kh.MaKhachHang = id;
-            var E_Pro = data.KhachHangs.First(m => m.MaKhachHang == id);
-            return View(E_Pro);
-        }
-        [HttpPost]
-        public ActionResult profile(int id, FormCollection collection)
-        {
-            KhachHang kh = (KhachHang)Session["Taikhoan"];
-            kh.MaKhachHang = id;
-            var E_Pro = data.KhachHangs.First(m => m.MaKhachHang == id);
+               public ActionResult profile(int id)
+               {
+                   KhachHang kh = (KhachHang)Session["Taikhoan"];
+                   kh.MaKhachHang = id;
+                   var E_Pro = data.KhachHangs.First(m => m.MaKhachHang == id);
+                   return View(E_Pro);
+               }
+               [HttpPost]
+               public ActionResult profile(int id, FormCollection collection)
+               {
+                   KhachHang kh = (KhachHang)Session["Taikhoan"];
+                   kh.MaKhachHang = id;
+                   var E_Pro = data.KhachHangs.First(m => m.MaKhachHang == id);
 
-            var Ten = collection["Ten"];
-            var TenDangNhap = collection["TenDangNhap"];
-            var MatKhau = collection["MatKhau"];
-            var MatKhauXacNhan = collection["MatKhauXacNhan"];
-            var Email = collection["Email"];
-            var DiaChi = collection["DiaChi"];
-            var SDT = collection["SDT"];
-            var ngaysinh = String.Format("{0:MM/dd/yyyy}", collection["ngaysinh"]);
+                   var Ten = collection["Ten"];
+                   var TenDangNhap = collection["TenDangNhap"];
+                   var MatKhau = collection["MatKhau"];
+                   var MatKhauXacNhan = collection["MatKhauXacNhan"];
+                   var Email = collection["Email"];
+                   var DiaChi = collection["DiaChi"];
+                   var SDT = collection["SDT"];
+                   var ngaysinh = String.Format("{0:MM/dd/yyyy}", collection["ngaysinh"]);
 
-            E_Pro.MaKhachHang = id;
-            if (string.IsNullOrEmpty(Ten))
-            {
-                ViewData["Error"] = "Don't empty!";
-            }
-            else
-            {
+                   E_Pro.MaKhachHang = id;
+                   if (string.IsNullOrEmpty(Ten))
+                   {
+                       ViewData["Error"] = "Don't empty!";
+                   }
+                   else
+                   {
 
-                kh.TenDangNhap = TenDangNhap;
-                kh.MatKhau = MatKhau;
-                kh.Email = Email;
-                kh.DiaChi = DiaChi;
-                kh.SDT = SDT;
-                kh.ngaysinh = DateTime.Parse(ngaysinh);
-                kh.id = Convert.ToInt32(collection["id"]);
+                       kh.TenDangNhap = TenDangNhap;
+                       kh.MatKhau = MatKhau;
+                       kh.Email = Email;
+                       kh.DiaChi = DiaChi;
+                       kh.SDT = SDT;
+                       kh.ngaysinh = DateTime.Parse(ngaysinh);
+                       kh.id = Convert.ToInt32(collection["id"]);
 
-                UpdateModel(E_Pro);
-                data.SubmitChanges();
-                return RedirectToAction("Index", "Home");
-            }
-            return this.profile(id);
-        }
-        private int TongSoLuongSanPham()
-        {
-            int tsl = 0;
-            List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
-            if (lstGiohang != null)
-            {
-                tsl = lstGiohang.Count;
-            }
-            return tsl;
-        }
+                       UpdateModel(E_Pro);
+                       data.SubmitChanges();
+                       return RedirectToAction("Index", "Home");
+                   }
+                   return this.profile(id);
+               }
+               private int TongSoLuongSanPham()
+               {
+                   int tsl = 0;
+                   List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
+                   if (lstGiohang != null)
+                   {
+                       tsl = lstGiohang.Count;
+                   }
+                   return tsl;
+               }
 
-        private double TongTien()
-        {
-            double tt = 0;
-            List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
-            if (lstGiohang != null)
-            {
-                tt = lstGiohang.Sum(n => n.dThanhtien);
-            }
+               private double TongTien()
+               {
+                   double tt = 0;
+                   List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
+                   if (lstGiohang != null)
+                   {
+                       tt = lstGiohang.Sum(n => n.dThanhtien);
+                   }
 
-            if (tt <= 300000)
-            {
-                return tt;
-            }
-            else
-            {
-                if (tt > 300000 && tt <= 1000000)
-                {
-                    return tt * 0.7;
-                }
-                else
-                {
-                    return tt * 0.5;
-                }
-            }
-        }
-*/
+                   if (tt <= 300000)
+                   {
+                       return tt;
+                   }
+                   else
+                   {
+                       if (tt > 300000 && tt <= 1000000)
+                       {
+                           return tt * 0.7;
+                       }
+                       else
+                       {
+                           return tt * 0.5;
+                       }
+                   }
+               }
+       */
 
 
         /*        public void sendPass(string pass , System.Web.Mvc.FormCollection collection)

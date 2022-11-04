@@ -26,7 +26,7 @@ namespace QuanLyCH.Controllers
         public ActionResult ThemGiohang(int id, string strURL)
         {
             List<GioHang> lstGiohang = Laygiohang();
-            GioHang sanpham = lstGiohang.Find(n => n.Matour == id);
+            GioHang sanpham = lstGiohang.Find(n => n.ID == id);
             if (sanpham == null)
             {
                 sanpham = new GioHang(id);
@@ -34,8 +34,11 @@ namespace QuanLyCH.Controllers
                 return Redirect(strURL);
             }
             else
-            {
-                sanpham.iSoluong++;
+            {   
+
+                sanpham.iSoluongNguoiLon++;
+                sanpham.iSoluongTreEm++;
+
                 return Redirect(strURL);
             }
         }
@@ -45,7 +48,7 @@ namespace QuanLyCH.Controllers
             List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
             if (lstGiohang != null)
             {
-                tsl = lstGiohang.Sum(n => n.iSoluong);
+                tsl = lstGiohang.Sum(n => (n.iSoluongNguoiLon + n.iSoluongTreEm));
             }
             return tsl;
         }
@@ -105,10 +108,10 @@ namespace QuanLyCH.Controllers
         public ActionResult XoaGiohang(int id)
         {
             List<GioHang> lstGiohang = Laygiohang();
-            GioHang sanpham = lstGiohang.SingleOrDefault(n => n.Matour == id);
+            GioHang sanpham = lstGiohang.SingleOrDefault(n => n.ID == id);
             if (sanpham != null)
             {
-                lstGiohang.RemoveAll(n => n.Matour == id);
+                lstGiohang.RemoveAll(n => n.ID == id);
                 return RedirectToAction("GioHang");
             }
             return RedirectToAction("GioHang");
@@ -118,10 +121,12 @@ namespace QuanLyCH.Controllers
             var E_Tour = data.Tours.First(m => m.ID == id);
             ViewBag.Max = Convert.ToInt32(E_Tour.SoCho);
             List<GioHang> lstGiohang = Laygiohang();
-            GioHang sanpham = lstGiohang.SingleOrDefault(n => n.Matour == id);
+            GioHang sanpham = lstGiohang.SingleOrDefault(n => n.ID == id);
             if (sanpham != null)
             {
-                sanpham.iSoluong = int.Parse(collection["txtSolg"].ToString());
+               sanpham.iSoluongNguoiLon = int.Parse(collection["txtSolg1"].ToString());
+                sanpham.iSoluongTreEm = int.Parse(collection["txtSolg2"].ToString());
+
             }
             return RedirectToAction("GioHang");
         }
@@ -151,55 +156,37 @@ namespace QuanLyCH.Controllers
             return View(lstGiohang);
 
         }
-        /*public ActionResult DatHang(System.Web.Mvc.FormCollection collection)
+        public ActionResult DatHang(System.Web.Mvc.FormCollection collection)
         {
-            DonHang dh = new DonHang();
+            DatTour dt = new DatTour();
             KhachHang kh = (KhachHang)Session["Taikhoan"];
-            Giay s = new Giay();
-            List<GioHang> gh = Laygiohang();
-            var ngaygiao = String.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
-            dh.makh = kh.makh;
-            dh.ngaydat = DateTime.Now;
-            dh.ngaygiao = DateTime.Parse(ngaygiao);
-            dh.giaohang = false;
-            dh.thanhtoan = false;
-            data.DonHangs.InsertOnSubmit(dh);
+            Tour s = new Tour();
+            List<GioHang> gh = Laygiohang();                      
+            dt.NgayDat = DateTime.Now;
+            dt.MaKhachHang = kh.MaKhachHang;
+            data.DatTours.InsertOnSubmit(dt);
             data.SubmitChanges();
             double tong = 0;
             foreach (var item in gh)
             {
-                ChiTietDonHang ctdh = new ChiTietDonHang();
-                ctdh.madon = dh.madon;
-                ctdh.magiay = item.magiay;
-                ctdh.soluong = item.iSoluong;
-                ctdh.gia = (decimal)item.giagiam;
-                s = data.Giays.Single(n => n.magiay == item.magiay);
-                s.soluongton -= ctdh.soluong;
+                ChiTietDatTour ctdh = new ChiTietDatTour();
+                ctdh.MaDatTour = dt.MaDatTour;
+                ctdh.ID= item.ID;
+                ctdh.SoCho = (item.iSoluongNguoiLon + item.iSoluongTreEm);
+                ctdh.Gia = (decimal)item.dThanhtien;
+                s = data.Tours.Single(n => n.ID == item.ID);
+                s.SoCho -= ctdh.SoCho;
                 data.SubmitChanges();
-                data.ChiTietDonHangs.InsertOnSubmit(ctdh);
+                data.ChiTietDatTours.InsertOnSubmit(ctdh);
                 tong += item.dThanhtien;
             }
             data.SubmitChanges();
             Session["Giohang"] = null;
-            *//*string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/neworder.html"));
-
-            content = content.Replace("{{CustomerName}}", dh.KhachHang.hoten);
-            content = content.Replace("{{Phone}}", dh.KhachHang.dienthoai);
-            content = content.Replace("{{Email}}", dh.KhachHang.email);
-            content = content.Replace("{{Address}}", dh.KhachHang.diachi);
-            content = content.Replace("{{Total}}", tong.ToString("N0"));
-            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
-
-
-            new MailHelper().SendMail(dh.KhachHang.email, "Đơn hàng mới từ đại lý HHTTs", content);
-            new MailHelper().SendMail(toEmail, "Đơn hàng", content);
-            data.SubmitChanges();*/
-            /*Session["GioHang"] = null;*//*
             return RedirectToAction("XacnhanDonHang", "Giohang");
 
 
         }
-*/
+
         /*public ActionResult NguoiDung()
         {
             KhachHang kh = (KhachHang)Session["Taikhoan"];

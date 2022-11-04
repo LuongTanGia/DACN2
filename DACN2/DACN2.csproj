@@ -2302,9 +2302,10 @@
     <Content Include="Views\Tour\Create.cshtml" />
     <Content Include="Views\Tour\Delete.cshtml" />
     <Content Include="Views\Tour\Edit.cshtml" />
+    <Content Include="Views\GioHang\GioHang.cshtml" />
+    <Content Include="Views\GioHang\DatHang.cshtml" />
     <Content Include="Views\KhachHang\DangKy.cshtml" />
     <Content Include="Views\KhachHang\DangNhap.cshtml" />
-    <Content Include="Views\GioHang\GioHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

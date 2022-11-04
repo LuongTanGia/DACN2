@@ -41,43 +41,43 @@
         @foreach (var item in Model)
         {
 
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.TenTour)</td>
-        <td> <img src="@item.Hinh" width="180" /></td>
-        @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.ID }))
-        {
-            <td>@String.Format("{0:0,0}", item.GiaNguoiLon) VNĐ </td>
-            <td>@String.Format("{0:0,0}", item.GiaTreEm) VNĐ </td>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TenTour)</td>
+                <td> <img src="@item.Hinh" width="180" /></td>
+                @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.ID }))
+                {
+                    <td>@String.Format("{0:0,0}", item.GiaNguoiLon) VNĐ </td>
+                    <td>@String.Format("{0:0,0}", item.GiaTreEm) VNĐ </td>
 
-            <td>
-              
+                    <td>
 
-                <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max" name="txtSolg1" value="@item.iSoluongNguoiLon" style="width:40px; border:none" />
-                
-                @{ 
-                    @*tính số chỗ của trẻ em*@
-                    item.maxte = (item.max - item.iSoluongNguoiLon);
+
+                        <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max" name="txtSolg1" value="@item.iSoluongNguoiLon" style="width:40px; border:none" />
+
+                        @{
+                            @*tính số chỗ của trẻ em*@
+                            item.maxte = (item.max - item.iSoluongNguoiLon);
+                        }
+
+
+
+
+                    </td>
+
+                    <td>
+                        <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="0" max="@item.maxte" name="txtSolg2" value="@item.iSoluongTreEm" style="width:40px; border:none" />
+
+                    </td>
+                    <td> @Html.DisplayFor(modelItem => item.dThanhtien)</td>
+                    <td>
+                        <a href="@Url.Action("Detail","Giay",new { id =item.ID } )">Chi tiết</a> | @Html.ActionLink("Xóa", "XoaGiohang", new { @id = item.ID })
+                    </td>
+                    <td>
+                        <input type="submit" value="Cập Nhật" class="btn btn-success" />
+                    </td>
+
                 }
-
-
-
-
-            </td>
-
-            <td>
-                <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="0" max="@item.maxte" name="txtSolg2" value="@item.iSoluongTreEm" style="width:40px; border:none" />
-
-            </td>
-            <td> @Html.DisplayFor(modelItem => item.dThanhtien)</td>
-            <td>
-                <a href="@Url.Action("Detail","Giay",new { id =item.ID } )">Chi tiết</a> | @Html.ActionLink("Xóa", "XoaGiohang", new { @id = item.ID })
-            </td>
-            <td>
-                <input type="submit" value="Cập Nhật" class="btn btn-success" />
-            </td>
-
-        }
-    </tr>
+            </tr>
         }
 
 
@@ -168,6 +168,68 @@
     </div>
 
 </div>
+@using DACN2.Models
+<h2 style="text-align:center">Thông tin đặt hàng</h2>
+@{
+    KhachHang kh = (KhachHang)Session["TaiKhoan"];
+}
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form role="form">
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <p>Họ tên khách hàng: </p>
+                            <p style="font-weight:bold">@kh.Ten</p>
+                        </div>
+                        <div class="form-group">
+                            <p>Ðịa chỉ: </p>
+                            <p style="font-weight:bold">@kh.DiaChi</p>
+                        </div>
+                        <div class="form-group">
+                            <p>Điện thoại: </p>
+                            <p style="font-weight:bold">@kh.SDT</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <p>Email: </p>
+                            <p style="font-weight:bold">@kh.Email</p>
+                        </div>
+                        <div class="form-group">
+                            <p>Ngày đặt: </p>
+                            <p style="font-weight:bold">@DateTime.Now.ToShortDateString()</p>
+                        </div>
+                        <div class="form-group">
+                            <p>Ngày giao: </p>
+                            <p style-"font-weight:bold">
+                                <input type="date" name="NgayGiao" id="NgayGiao" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div style="height:40px">
+                    <p></p>
+                    <p style="font-weight:bold">
+
+                        <input value="Xác nhận" class="btn btn-success" href="" type="submit" />
+
+                        <a class="btn btn-info" href="@Url.Action("sendPass","NguoiDung")">Xac Nhan Qua Mail</a>
+
+                        <a class="btn btn-danger" href="@Url.Action("Payment","momo")">Thanh toán Momo</a>
+                    </p>
+                </div>
+                <hr class="colorgraph">
+
+
+            </form>
+        </div>
+    }
+</div>
 <hr class="colorgraph" />
 <style>
     .colorgraph {
@@ -196,3 +258,26 @@
         background-color: blue;
     }
 </style>
+<script>
+    function setInputDate(_id) {
+        var _dat = document.querySelector(_id);
+        var hoy = new Date(),
+            d = hoy.getDate(),
+            m = hoy.getMonth() + 1,
+            y = hoy.getFullYear(),
+            data;
+
+        if (d < 10) {
+            d = "0" + d;
+        };
+        if (m < 10) {
+            m = "0" + m;
+        };
+
+        data = y + "-" + m + "-" + d;
+        console.log(data);
+        _dat.value = data;
+    };
+
+    setInputDate("#NgayGiao");
+</script>

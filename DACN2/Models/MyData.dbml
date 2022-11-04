@@ -2,11 +2,12 @@
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-C560BEH;Initial Catalog=QLDL;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QLDLConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ChiTietDatTour" Member="ChiTietDatTours">
     <Type Name="ChiTietDatTour">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="MaKhachHang" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MaDatTour" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaDatTour" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SoCho" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Tour_ChiTietDatTour" Member="Tour" ThisKey="ID" OtherKey="ID" Type="Tour" IsForeignKey="true" />
       <Association Name="DatTour_ChiTietDatTour" Member="DatTour" ThisKey="MaDatTour" OtherKey="MaDatTour" Type="DatTour" IsForeignKey="true" />
-      <Association Name="KhachHang_ChiTietDatTour" Member="KhachHang" ThisKey="MaKhachHang" OtherKey="MaKhachHang" Type="KhachHang" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Tour" Member="Tours">
@@ -17,7 +18,7 @@
       <Column Name="NgayKhoiHanh" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="NgayKetThuc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="SoCho" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Column Name="MaLoaiTour" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IDHDV" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MaDiaDiem" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -34,7 +35,7 @@
       <Column Name="Hinh2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Hinh3" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Hinh4" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Tour_DatTour" Member="DatTours" ThisKey="ID" OtherKey="MaTour" Type="DatTour" />
+      <Association Name="Tour_ChiTietDatTour" Member="ChiTietDatTours" ThisKey="ID" OtherKey="ID" Type="ChiTietDatTour" />
       <Association Name="DiaDiem_Tour" Member="DiaDiem" ThisKey="MaDiaDiem" OtherKey="MaDiaDiem" Type="DiaDiem" IsForeignKey="true" />
       <Association Name="HuongDanVien_Tour" Member="HuongDanVien" ThisKey="IDHDV" OtherKey="IDHDV" Type="HuongDanVien" IsForeignKey="true" />
       <Association Name="KSan_Tour" Member="KSan" ThisKey="MaKS" OtherKey="MaKS" Type="KSan" IsForeignKey="true" />
@@ -46,12 +47,10 @@
   <Table Name="dbo.DatTour" Member="DatTours">
     <Type Name="DatTour">
       <Column Name="MaDatTour" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="NgayDat" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="SoCho" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ThanhTien" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MaTour" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayDat" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MaKhachHang" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="DatTour_ChiTietDatTour" Member="ChiTietDatTours" ThisKey="MaDatTour" OtherKey="MaDatTour" Type="ChiTietDatTour" />
-      <Association Name="Tour_DatTour" Member="Tour" ThisKey="MaTour" OtherKey="ID" Type="Tour" IsForeignKey="true" />
+      <Association Name="KhachHang_DatTour" Member="KhachHang" ThisKey="MaKhachHang" OtherKey="MaKhachHang" Type="KhachHang" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DiaDiem" Member="DiaDiems">
@@ -88,7 +87,7 @@
       <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="GioiTinh" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="CMND" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="KhachHang_ChiTietDatTour" Member="ChiTietDatTours" ThisKey="MaKhachHang" OtherKey="MaKhachHang" Type="ChiTietDatTour" />
+      <Association Name="KhachHang_DatTour" Member="DatTours" ThisKey="MaKhachHang" OtherKey="MaKhachHang" Type="DatTour" />
       <Association Name="KhachHang_PhanHoi" Member="PhanHois" ThisKey="MaKhachHang" OtherKey="MaKhachHang" Type="PhanHoi" />
     </Type>
   </Table>
@@ -96,7 +95,7 @@
     <Type Name="KSan">
       <Column Name="TenKhachSan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="MaKS" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Diachi" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Diachi" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Association Name="KSan_Tour" Member="Tours" ThisKey="MaKS" OtherKey="MaKS" Type="Tour" />
     </Type>
   </Table>
@@ -105,13 +104,13 @@
       <Column Name="MaLichTrinh" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TenLichTrinh" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
       <Column Name="Moc1" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
-      <Column Name="CTMoc1" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="CTMoc1" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Column Name="Moc2" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
-      <Column Name="CTMoc2" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="CTMoc2" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Column Name="Moc3" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
-      <Column Name="CTMoc3" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="CTMoc3" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Column Name="Moc4" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
-      <Column Name="CTMoc4" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="CTMoc4" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Association Name="LichTrinh_Tour" Member="Tours" ThisKey="MaLichTrinh" OtherKey="MaLichTrinh" Type="Tour" />
     </Type>
   </Table>
@@ -127,7 +126,7 @@
   <Table Name="dbo.MayBay" Member="MayBays">
     <Type Name="MayBay">
       <Column Name="MaMayBay" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TenChuyenBay" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="TenChuyenBay" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
       <Column Name="GioDi" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="GIoDen" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="MayBay_Tour" Member="Tours" ThisKey="MaMayBay" OtherKey="MaMayBay" Type="Tour" />
