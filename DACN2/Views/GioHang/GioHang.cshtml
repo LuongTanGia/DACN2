@@ -41,49 +41,90 @@
         @foreach (var item in Model)
         {
 
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.TenTour)</td>
-        <td> <img src="@item.Hinh" width="180" /></td>
-        @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.ID }))
-        {
-            <td>@String.Format("{0:0,0}", item.GiaNguoiLon) VNĐ </td>
-            <td>@String.Format("{0:0,0}", item.GiaTreEm) VNĐ </td>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TenTour)</td>
+                <td> <img src="@item.Hinh" width="180" /></td>
+                @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.ID }))
+                {
+                    <td>@String.Format("{0:0,0}", item.GiaNguoiLon) VNĐ </td>
+                    <td>@String.Format("{0:0,0}", item.GiaTreEm) VNĐ </td>
 
-            <td>
-              
+                    <td>
 
-                <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max" name="txtSolg1" value="@item.iSoluongNguoiLon" style="width:40px; border:none" />
-                
-                @{ 
-                    @*tính số chỗ của trẻ em*@
-                    item.maxte = (item.max - item.iSoluongNguoiLon);
+
+                        <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max" name="txtSolg1" value="@item.iSoluongNguoiLon" style="width:40px; border:none" />
+
+                        @{
+                            @*tính số chỗ của trẻ em*@
+                            item.maxte = (item.max - item.iSoluongNguoiLon);
+                        }
+
+
+
+
+                    </td>
+
+                    <td>
+                        <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="0" max="@item.maxte" name="txtSolg2" value="@item.iSoluongTreEm" style="width:40px; border:none" />
+
+                    </td>
+                    <td> @Html.DisplayFor(modelItem => item.dThanhtien)</td>
+                    <td>
+                        <a href="@Url.Action("Detail", "Giay", new { id = item.ID })">Chi tiết</a> | @Html.ActionLink("Xóa", "XoaGiohang", new { @id = item.ID })
+                    </td>
+                    <td>
+                        <input type="submit" value="Cập Nhật" class="btn btn-success" />
+                    </td>
+
                 }
+            </tr>
 
 
-
-
-            </td>
-
-            <td>
-                <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="0" max="@item.maxte" name="txtSolg2" value="@item.iSoluongTreEm" style="width:40px; border:none" />
-
-            </td>
-            <td> @Html.DisplayFor(modelItem => item.dThanhtien)</td>
-            <td>
-                <a href="@Url.Action("Detail","Giay",new { id =item.ID } )">Chi tiết</a> | @Html.ActionLink("Xóa", "XoaGiohang", new { @id = item.ID })
-            </td>
-            <td>
-                <input type="submit" value="Cập Nhật" class="btn btn-success" />
-            </td>
-
-        }
-    </tr>
         }
 
 
 
     </table>
 
+
+
+</div>
+<div style="display:flex; ">
+
+    <div class="traveler card" style="width:100%; margin: 30px 20px; height:100%;">
+        @using DACN2.Models
+        @{
+            List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
+
+        }
+
+        @foreach (var n in Model)
+        {
+            <div>
+                <h4 style="width:100%; font-size:15px; font-weight:bold;">@n.TenTour</h4>
+                @{for (int i = 0; i < n.iSoluongNguoiLon; i++)
+                    {
+                        <div class="" style="width:100%;">
+                            <div class="info" style="display:flex;">
+                                <h5 style="margin: 10px 5px 0 0; font-weight:bold;">Người Thứ @(i+1)</h5>
+                                <div class="form-group " style="">
+                                    <input type="text" placeholder="Ten" />
+                                    <input type="text" placeholder="gioitinh" />
+                                    <input type="text" placeholder="Sdt" />
+                                    <input type="date" placeholder="ngay" value="11/01/2022" />
+
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+
+                }
+                <hr />
+            </div>
+        }
+    </div>
     <div class="card">
         <h1>Shopping</h1>
         <hr />
@@ -166,8 +207,10 @@
             </div>
         </div>
     </div>
-
 </div>
+
+
+ 
 <hr class="colorgraph" />
 <style>
     .colorgraph {
@@ -189,7 +232,10 @@
         border-radius: 12px;
         padding: 5px;
     }
+    .info input {
+        height: 30px;
 
+    }
     .gradient-custom {
         /* fallback for old browsers */
         /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

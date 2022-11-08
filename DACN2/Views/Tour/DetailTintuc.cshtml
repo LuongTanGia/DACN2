@@ -1,0 +1,80 @@
+﻿@model DACN2.Models.TinTuc
+
+@{
+    ViewBag.Title = "DetailTinTuc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main role="main" style=" font-size: 15px;">
+    <div class="tour-detail" style="display:flex; flex-direction:column;">
+        <div class="entry-head" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+
+            <section class="section-01" style="width:100%;">
+                <div class="container-xl">
+                    <div class="" style="flex-direction:column;  ">
+                        <div class="">
+                            <h1 class="title" style="text-align: center; margin: 0; width:100%;">
+                                @Html.DisplayFor(model => model.TieuDe)
+                            </h1>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="section-02">
+                <div class="container ">
+                    <div class="" style="display:flex; flex-direction:column; align-items:center; justify-content:center;>
+                        <div class="">
+                            <div class="image" style="width:100%;">
+                                <img src="@Html.DisplayFor(model => model.HinhAnh)" class="img-fluid" alt="image">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        <div class="tab-panels">
+            <div class="overview active">
+
+                <section class="section-03 mb-5">
+                    <div class="container">
+                        <div class="">
+                            <div class="col-md-5 col-12 " style="width:100%;">
+
+                                @{ string[] ps = Model.NoiDung.Split('.');
+
+                                    for (byte i = 0; i < ps.Length; i++)
+                                    {
+                                        <p class="s-title-03 tour-des">@ps[i]</p> } }
+
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+            </section>
+        </div>
+
+    </div>
+</main>
+
+
+
+
+
+
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .image2 {
+        margin: 20px;
+    }
+</style>

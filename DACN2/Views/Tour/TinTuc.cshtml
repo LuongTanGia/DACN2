@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DACN2.Models.TinTuc>
+@{
+    ViewBag.Title = "TinTuc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row show-on-scroll right-to-left" style="display:block">
+
+
+
+    @foreach (var item in Model)
+    {
+    
+
+    }
+</div>
+
+
+<div class="container">
+    <div class="row mb-2">
+        <div class="col-12 text-center pt-3">
+            <h1>Bootstrap 4 News Magazine Carousel</h1>
+            <p>This is a basic bootstrap sorce code for make responsive magazine big grid cover with carousel</p>
+            <h4>You like this snippet ? click like button</h4>
+        </div>
+    </div>
+
+    <!--Start code-->
+    <div class="row">
+        <div class="col-12 col-md-6 pt-2 pl-md-1 mb-3 mb-lg-4" style="display:flex; justify-content:flex-start; align-items:center; flex-wrap:wrap; width:100%; padding: 10px 0;">
+            @foreach (var item in Model)
+            {
+                <div style="display:flex; justify-content:space-around; align-items:center; flex-wrap: wrap; margin:20px;">
+                    <!--news box-->
+
+
+                    
+
+
+
+
+                        <div class="col-6 pb-1 pt-0 pr-1">
+                            <div class="card border-0 rounded-0 text-white overflow zoom">
+                                <div class="position-relative">
+                                    <!--thumbnail img-->
+                                    <div class="ratio_right-cover-2 image-wrapper">
+                                        <a href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                            <img class="img-fluid"
+                                                 src="@item.HinhAnh"
+                                                 alt="simple blog template bootstrap" style="width:300px; height:300px; object-fit:cover; border-radius: 10px;">
+                                        </a>
+                                    </div>
+                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
+                                        <!-- category -->
+                                        <a class="p-1 badge badge-primary rounded-0" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">@item.TomTat</a>
+                                        <a class="p-1 badge badge-primary rounded-0" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">@item.NgayDang</a>
+
+
+                                        <!--title-->
+                                        <a href="@Url.Action("DetailTintuc", "Tour",new { @id = item.IDTinTuc})">
+                                            <h2 class="h5 text-white my-1" style="width:300px; height:50px;">@item.TieuDe</h2>
+                                        </a>
+
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                
+            }
+            </div>
+            
+    </div>
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <p>Design by Ari Budin <a target="_blank" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">Bootstrap.News</a> | images by pixabay and pexels</p>
+        </div>
+    </div>
+</div>

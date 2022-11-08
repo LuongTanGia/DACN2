@@ -84,7 +84,7 @@ namespace DACN2.Controllers
                 s.NoiDung = E_NoiDung.ToString();
                 s.ChiTietTour = E_ChiTietTour.ToString();
                 s.MaLoaiTour = E_MaLoaiTour;
-                s.MaTour = E_MaTour;
+                
                 s.Hinh = E_Hinh.ToString();
                 s.MaKS = E_MaKS;
                 s.MaDiaDiem = E_MaDiaDiem;
@@ -171,7 +171,7 @@ namespace DACN2.Controllers
                 D_tour.NoiDung = E_NoiDung.ToString();
                 D_tour.ChiTietTour = E_ChiTietTour.ToString();
                 D_tour.MaLoaiTour = E_MaLoaiTour;
-                D_tour.MaTour = E_MaTour;
+                
                 D_tour.Hinh = E_Hinh.ToString();
                 D_tour.MaKS = E_MaKS;
                 D_tour.MaDiaDiem = E_MaDiaDiem;
@@ -196,7 +196,19 @@ namespace DACN2.Controllers
 
             return this.Edit(id);
         }
-
+        public ActionResult Delete(int id)
+        {
+            var D_tour = data.Tours.First(m => m.ID == id);
+            return View(D_tour);
+        }
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            var D_giay = data.Tours.Where(m => m.ID == id).First();
+            data.Tours.DeleteOnSubmit(D_giay);
+            data.SubmitChanges();
+            return RedirectToAction("ListGiay");
+        }
 
         public string ProcessUpload(HttpPostedFileBase file)
         {
@@ -206,6 +218,18 @@ namespace DACN2.Controllers
             }
             file.SaveAs(Server.MapPath("~/Content/images/" + file.FileName));
             return "/Content/images/" + file.FileName;
+        }
+
+        public ActionResult TinTuc()
+        {
+            var all_tt = from s in data.TinTucs select s;
+            return View(all_tt);
+        }
+
+        public ActionResult DetailTintuc(int id)
+        {
+            var D_tt = data.TinTucs.FirstOrDefault(m => m.IDTinTuc == id);
+            return View(D_tt);
         }
     }
 }

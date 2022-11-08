@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLDL" Class="MyDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-C560BEH;Initial Catalog=QLDL;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QLDLConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.ChiTietDatTour" Member="ChiTietDatTours">
-    <Type Name="ChiTietDatTour">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="MaDatTour" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="SoCho" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Gia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Association Name="Tour_ChiTietDatTour" Member="Tour" ThisKey="ID" OtherKey="ID" Type="Tour" IsForeignKey="true" />
-      <Association Name="DatTour_ChiTietDatTour" Member="DatTour" ThisKey="MaDatTour" OtherKey="MaDatTour" Type="DatTour" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Tour" Member="Tours">
     <Type Name="Tour">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -24,7 +14,6 @@
       <Column Name="MaDiaDiem" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MaKS" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MaMayBay" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MaTour" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
       <Column Name="Hinh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="NoiKhoiHanh" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="MaLichTrinh" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -42,6 +31,16 @@
       <Association Name="LichTrinh_Tour" Member="LichTrinh" ThisKey="MaLichTrinh" OtherKey="MaLichTrinh" Type="LichTrinh" IsForeignKey="true" />
       <Association Name="LoaiTour_Tour" Member="LoaiTour" ThisKey="MaLoaiTour" OtherKey="MaLoaiTour" Type="LoaiTour" IsForeignKey="true" />
       <Association Name="MayBay_Tour" Member="MayBay" ThisKey="MaMayBay" OtherKey="MaMayBay" Type="MayBay" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ChiTietDatTour" Member="ChiTietDatTours">
+    <Type Name="ChiTietDatTour">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaDatTour" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SoCho" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Tour_ChiTietDatTour" Member="Tour" ThisKey="ID" OtherKey="ID" Type="Tour" IsForeignKey="true" />
+      <Association Name="DatTour_ChiTietDatTour" Member="DatTour" ThisKey="MaDatTour" OtherKey="MaDatTour" Type="DatTour" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DatTour" Member="DatTours">
@@ -88,7 +87,6 @@
       <Column Name="GioiTinh" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="CMND" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="KhachHang_DatTour" Member="DatTours" ThisKey="MaKhachHang" OtherKey="MaKhachHang" Type="DatTour" />
-      <Association Name="KhachHang_PhanHoi" Member="PhanHois" ThisKey="MaKhachHang" OtherKey="MaKhachHang" Type="PhanHoi" />
     </Type>
   </Table>
   <Table Name="dbo.KSan" Member="KSans">
@@ -132,15 +130,6 @@
       <Association Name="MayBay_Tour" Member="Tours" ThisKey="MaMayBay" OtherKey="MaMayBay" Type="Tour" />
     </Type>
   </Table>
-  <Table Name="dbo.PhanHoi" Member="PhanHois">
-    <Type Name="PhanHoi">
-      <Column Name="MaKhachHang" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="MaPH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="MaTour" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="KhachHang_PhanHoi" Member="KhachHang" ThisKey="MaKhachHang" OtherKey="MaKhachHang" Type="KhachHang" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.TaiKhoanNV" Member="TaiKhoanNVs">
     <Type Name="TaiKhoanNV">
       <Column Name="MaNV" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -152,13 +141,13 @@
   </Table>
   <Table Name="dbo.TinTuc" Member="TinTucs">
     <Type Name="TinTuc">
-      <Column Name="IDTinTuc" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="TieuDe" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="HinhAnh" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="TomTat" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="IDTinTuc" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TieuDe" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="TomTat" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
       <Column Name="NgayDang" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="MaNV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HinhAnh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="TaiKhoanNV_TinTuc" Member="TaiKhoanNV" ThisKey="MaNV" OtherKey="MaNV" Type="TaiKhoanNV" IsForeignKey="true" />
     </Type>
   </Table>
