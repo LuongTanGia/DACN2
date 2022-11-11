@@ -27,8 +27,19 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Tour")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Tin Tức", "TinTuc", "Tour")</li>
                     <li>@Html.ActionLink("GioHang", "GioHang", "GioHang")</li>
+                    <li>@Html.Action("LoaiSanPham", "Tour")</li>
+                    <li>
+                        @using (Html.BeginForm("Index", "Tour", FormMethod.Get, new { @class = "form-inline" }))
+                        {
+                            <div class="form-group form-inline" style="display: flex; align-items: center; justify-content: center; margin:10px; ">
+                                <input type="Text" class="form-control col-md-10" value="@ViewBag.Keyword" name="searchString" placeholder="Nhập tên cần tìm">
+                                <input type="submit" class="btn  btn-primary" value="Tìm Tour" style="margin-left:10px;">
+                            </div>
+
+                        }
+                    </li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -42,9 +53,9 @@
                     }
                     else
                     {
-                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-user"></i> </a></li>
+                        
                         <li>@Html.ActionLink("Đăng Ký", "Dangky", "KhachHang")</li>
-                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-right-to-bracket"></i></a></li>
+                        
                         <li>@Html.ActionLink("Đăng Nhập", "DangNhap", "KhachHang")</li>
                     }
                     @*<li>@Html.ActionLink("Dang Ky", "DangKy", "NguoiDung")</li>

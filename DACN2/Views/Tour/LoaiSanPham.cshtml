@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DACN2.Models.LoaiTour>
+
+
+
+
+<div class="dropdown a">
+    <h4 type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Loai San Pham &#9776;
+    </h4>
+
+    <div class="dropdown-menu b" aria-labelledby="dropdownMenuButton" style-"text-align:left;">
+        @foreach (var item in Model)
+        {
+            <a href="@Url.Action("SPTheoLoai", "Tour", new { id = item.MaLoaiTour })" class="dropdown-item" style="margin-left:5px; text-decoration:none; color:black;">
+                &#9830; @item.TenLoaiTour
+                <hr />
+            </a>
+        }
+    </div>
+</div>
+<style>
+    .a{
+        margin-top:15px;
+        color:#808080;
+        transition: 0.5s;
+    }
+    .a:hover {
+        color:white;
+    }
+
+        .a:hover .b {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+</style>

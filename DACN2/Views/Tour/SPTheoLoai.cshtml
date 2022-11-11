@@ -1,0 +1,108 @@
+﻿
+@model IEnumerable<DACN2.Models.Tour>
+@{
+    ViewBag.Title = "SPTheoLoai";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr />
+<div class="">
+    @Html.Action("LoaiSanPham", "Tour")
+</div>
+<div class="row show-on-scroll right-to-left" style="display:block">
+
+
+
+    @foreach (var item in Model)
+    {
+        <div class="">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="col-xs-12 cardItem">
+                    <a href="/du-lich/tour-nhat-ban-7n6d-cung-duong-vang-hanh-trinh-mua-thu/1825">
+                        <div class="col-xs-12 no-padding cardItemContainer">
+                            <div class="col-xs-12 no-padding cardItemImage">
+                                <div class="ribbonContainerOuter">
+                                    <div class="ribbonContainerInner">
+                                        <span class="v-ribbon"><span>@item.ChiTietTour</span></span>
+                                    </div>
+                                </div>
+                                <figure>
+                                    <picture>
+
+                                        <img class="img-responsive" src="@item.Hinh" style=" height:200px; object-fit:cover">
+                                    </picture>
+                                </figure>
+                                <div class="cardItemPriceDivOuter hidden">
+                                    <div class="cardItemPriceDivInner">
+                                        <span class="cardItemPriceAfterDiscount"><i class="glyphicon glyphicon-map-marker"></i>@item.TenTour</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 cardItemContent">
+                                <div class="col-xs-12 no-padding">
+                                    <div class="col-xs-12 v-margin-bottom-10 cardItemTourNameDiv">
+                                        <span class="cardItemTourName">@item.TenTour</span>
+                                    </div>
+                                    <div class="col-xs-12 no-padding cardItemTourDetailDiv">
+                                        <div class="col-xs-12 v-margin-bottom-10 hidden-xs">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <span><i class="glyphicon glyphicon-time" data-toggle="tooltip" title="" data-original-title="Thời lượng tour"></i>@item.NgayKhoiHanh - @item.NgayKetThuc </span>
+                                                </div>
+                                                <div class="col-xs-6 text-right transportDiv">
+                                                    <i class="fa icon-plane" data-toggle="tooltip" title="" data-original-title="Di chuyển bằng Máy bay"></i><i class="fa icon-bus" data-toggle="tooltip" title="" data-original-title="Di chuyển bằng Ô tô"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 v-margin-bottom-5 cardItemDepartDiv">
+
+                                            <p>@item.ChiTietTour</p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cardItemPrice">
+                                            <div class="tourBooking24H hidden" data-id="1825">0 khách đặt trong 24h qua</div>
+                                            <div class="clearfix visible-xs"></div>
+                                            <span class="price vcolor-info">@item.Gia <small class="textCurrency">VND</small></span>
+                                        </div>
+                                        <div class="panel-footer clearfix">
+                                            <div class="pull-right">
+                                                <div class="DatMua">
+                                                    @if (item.SoCho > 0)
+                                                    {
+                                                        <a class="btn btn-success"
+                                                           href="@Url.Action("ThemGioHang", "GioHang", new
+                                                     {
+                                                              @id = item.ID,
+                                                                @strURL = Request.Url.ToString()
+                                                        })">Thêm vào giỏ</a>
+                                                        <a class="btn btn-default" href="@Url.Action("Detail", "Tour",new { @id = item.ID})">Thong Tin</a>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="btn  btn-warning ">
+                                                            Tạm Hết Hàng
+                                                        </a>
+                                                        <a class="btn btn-default" href="@Url.Action("Detail", "Tour",new { @id = item.ID})">Thong Tin</a>
+
+
+                                                    }
+                                                    @*<a class="btn btn-default" href="@Url.Action("Detail", "Giay",new { @id = item.magiay})">Thong Tin</a>
+                                                        <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang",new { @id = item.magiay, @strURL = Request.Url.ToString() })">Đặt mua</a>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    }
+</div>

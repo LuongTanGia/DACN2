@@ -11,9 +11,11 @@ namespace DACN2.Controllers
     {
         // GET: Tour
         MyDataDataContext data = new MyDataDataContext();
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
+            ViewBag.Keyword = searchString;
             var all_tour = from s in data.Tours select s;
+            if (!string.IsNullOrEmpty(searchString)) all_tour = (IOrderedQueryable<Tour>)all_tour.Where(a => a.TenTour.Contains(searchString));           
             return View(all_tour);
         }
 
@@ -230,6 +232,20 @@ namespace DACN2.Controllers
         {
             var D_tt = data.TinTucs.FirstOrDefault(m => m.IDTinTuc == id);
             return View(D_tt);
+        }
+
+        public ActionResult LoaiSanPham()
+        {
+            var loaisanpham = from s in data.LoaiTours select s;
+            return PartialView(loaisanpham);
+        }
+
+
+        public ActionResult SPTheoLoai(int id)
+        {
+            var sptl = from ss in data.Tours where ss.MaLoaiTour == id select ss;
+            return PartialView(sptl);
+
         }
     }
 }
