@@ -1,0 +1,117 @@
+﻿@model IEnumerable<DACN2.Models.Tour>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenTour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayKhoiHanh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayKetThuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoCho)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaLoaiTour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiKhoiHanh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaNguoiLon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTreEm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThoiGian)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hinh2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hinh3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hinh4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaNV)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenTour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayKhoiHanh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayKetThuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoCho)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaLoaiTour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiKhoiHanh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaNguoiLon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaTreEm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiGian)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hinh2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hinh3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hinh4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaNV)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
