@@ -140,6 +140,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\animate.min.css" />
+    <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\demo.css" />
+    <Content Include="Assets\css\light-bootstrap-dashboard.css" />
+    <Content Include="Assets\css\pe-icon-7-stroke.css" />
+    <Content Include="Assets\fonts\Pe-icon-7-stroke.svg" />
+    <Content Include="Assets\js\bootstrap-notify.js" />
+    <Content Include="Assets\js\bootstrap-select.js" />
+    <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\chartist.min.js" />
+    <Content Include="Assets\js\demo.js" />
+    <Content Include="Assets\js\jquery.3.2.1.min.js" />
+    <Content Include="Assets\js\light-bootstrap-dashboard.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -2267,6 +2280,9 @@
       <LastGenOutput>MyData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Assets\fonts\Pe-icon-7-stroke.eot" />
+    <Content Include="Assets\fonts\Pe-icon-7-stroke.ttf" />
+    <Content Include="Assets\fonts\Pe-icon-7-stroke.woff" />
     <None Include="Models\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
@@ -2316,6 +2332,9 @@
     <Content Include="Views\Tour\Listchang.cshtml" />
     <Content Include="Views\NhanVien\ListChang.cshtml" />
     <Content Include="Views\NhanVien\ListTour.cshtml" />
+    <Content Include="Views\NhanVien\ListLichTrinh.cshtml" />
+    <Content Include="Views\Tour\ListLichTrinh.cshtml" />
+    <Content Include="Views\Admin\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

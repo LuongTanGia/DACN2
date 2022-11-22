@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<DACN2.Models.Tour>
 
+@{
+    Layout = "~/Views/Admin/View.cshtml";
+}
+<h2>List Tour</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -56,62 +60,63 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenTour)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayKhoiHanh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayKetThuc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoCho)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoiDung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaLoaiTour)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hinh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoiKhoiHanh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaNguoiLon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaTreEm)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThoiGian)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hinh2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hinh3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hinh4)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaNV)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenTour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayKhoiHanh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayKetThuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoCho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLoaiTour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiKhoiHanh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaNguoiLon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaTreEm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGian)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hinh2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hinh3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hinh4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaNV)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>

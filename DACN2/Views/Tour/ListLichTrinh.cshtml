@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DACN2.Models.LichTrinh>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenLichTrinh)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.GiaLichTrinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaPhuongTien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaDiaDiem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaAnUong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaKS)
+        </th>
+       
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenLichTrinh)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaLichTrinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhuongTien.TenPhuongTien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaDiem.TenDiaDiem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnUong.TenBuaAn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KSan.TenKhachSan)
+            </td>
+  
+        </tr>
+    }
+
+</table>

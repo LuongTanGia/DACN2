@@ -35,6 +35,12 @@ namespace DACN2.Controllers
             return PartialView(sptl);
 
         }
+        public ActionResult ListLichTrinh(int id)
+        {
+            var sptl = from ss in data.LichTrinhs where ss.MaChang == id select ss;
+            return PartialView(sptl);
+
+        }
         public ActionResult Create()
         {
             /*Tour Tour = new Tour();            

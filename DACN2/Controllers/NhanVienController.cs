@@ -27,5 +27,11 @@ namespace DACN2.Controllers
             return PartialView(sptl);
 
         }
+        public ActionResult ListLichTrinh()
+        {
+            var sptl = from ss in data.LichTrinhs select ss;
+            return PartialView(sptl);
+
+        }
     }
 }

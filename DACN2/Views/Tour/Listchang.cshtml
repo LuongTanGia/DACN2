@@ -22,6 +22,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.NoiDungChang)
+            <div>
+                @Html.Action("ListLichTrinh","Tour", new { id = item.MaChang })
+            </div>        
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.GiaChang)
