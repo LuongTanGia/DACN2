@@ -179,57 +179,7 @@
     {
         @Html.ValidationSummary(true)
         
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form role="form">
-                <hr class="colorgraph">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <p>Họ tên khách hàng: </p>
-                            <p style="font-weight:bold">@kh.Ten</p>
-                        </div>
-                        <div class="form-group">
-                            <p>Ðịa chỉ: </p>
-                            <p style="font-weight:bold">@kh.DiaChi</p>
-                        </div>
-                        <div class="form-group">
-                            <p>Điện thoại: </p>
-                            <p style="font-weight:bold">@kh.SDT</p>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <p>Email: </p>
-                            <p style="font-weight:bold">@kh.Email</p>
-                        </div>
-                        <div class="form-group">
-                            <p>Ngày đặt: </p>
-                            <p style="font-weight:bold">@DateTime.Now.ToShortDateString()</p>
-                        </div>
-                        <div class="form-group">
-                            <p>Ngày giao: </p>
-                            <p style-"font-weight:bold">
-                                <input type="date" name="NgayGiao" id="NgayGiao" />
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div style="height:40px">
-                    <p></p>
-                    <p style="font-weight:bold">
-
-                        <input value="Xác nhận" class="btn btn-success" href="" type="submit" />
-
-                        <a class="btn btn-info" href="@Url.Action("sendPass","NguoiDung")">Xac Nhan Qua Mail</a>
-
-                        <a class="btn btn-danger" href="@Url.Action("Payment","momo")">Thanh toán Momo</a>
-                    </p>
-                </div>
-                <hr class="colorgraph">
-
-
-            </form>
-        </div>
+        
     }
 </div>
 <hr class="colorgraph" />

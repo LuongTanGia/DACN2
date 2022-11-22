@@ -2304,12 +2304,15 @@
     <Content Include="Views\Tour\Edit.cshtml" />
     <Content Include="Views\GioHang\GioHang.cshtml" />
     <Content Include="Views\GioHang\DatHang.cshtml" />
-    <Content Include="Views\KhachHang\DangKy.cshtml" />
     <Content Include="Views\KhachHang\DangNhap.cshtml" />
     <Content Include="Views\Tour\TinTuc.cshtml" />
     <Content Include="Views\Tour\DetailTintuc.cshtml" />
     <Content Include="Views\Tour\LoaiSanPham.cshtml" />
     <Content Include="Views\Tour\SPTheoLoai.cshtml" />
+    <Content Include="Views\Tour\DonHang.cshtml" />
+    <Content Include="Views\Tour\Chitietdonhang.cshtml" />
+    <Content Include="Views\GioHang\DangKy.cshtml" />
+    <Content Include="Views\Tour\Listchang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

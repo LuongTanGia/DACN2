@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DACN2.Models.ChiTietDatTour>
+@using DACN2.Models
+@{
+    ViewBag.Title = "DonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Đơn Hàng </h2>
+
+
+<table class="table" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+    <tr>
+        <th>
+            Tên khách hàng
+
+        </th>
+        <th>
+            Ngày Đặt
+        </th>
+        <th>
+            Giá
+        </th>
+
+        <th>
+            Tổng Tiền
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatTour.KhachHang.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatTour.NgayDat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gia)
+            </td>
+
+
+            <td>
+                @String.Format("{0:0,000}", item.Gia) VND
+            </td>
+
+            <td>
+
+                @Html.ActionLink("Chi tiết đơn hàng", "Chitietdonhang", new { id = item.MaDatTour }) |
+                @Html.ActionLink("Xác nhận đơn hàng", "DeleteDH", new { id = item.MaDatTour })
+            </td>
+        </tr>
+    }
+
+</table>
+<tr>
+    <td colspan="5" class="text-right"><b>Doanh thu: @String.Format("{0:0,000}", @ViewBag.tongtien) VNĐ</b></td>
+
+</tr>

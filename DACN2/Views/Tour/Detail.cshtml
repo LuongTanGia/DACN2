@@ -9,648 +9,400 @@
 
 
 
+<main role="main" style=" font-size: 15px;">
+    <div class="tour-detail">
+        <div class="entry-head">
 
-    <main role="main" style=" font-size: 15px;">
-        <div class="tour-detail">
-            <div class="entry-head">
-
-                <section class="section-01">
-                    <div class="container-xl">
-                        <div class="row">
-                            <div class="col-md-6 col-12 left">
-
-                                <h1 class="title">
-                                    @Html.DisplayFor(model => model.TenTour)
-                                </h1>
-                                <div class="short-rating">
-                                    <div class="s-rate">
-                                        <span>9</span>
-                                        <div class="s-comment">
-                                            <h4>Tuyệt vời</h4>
-                                            <p>358 quan tâm</p>
-                                        </div>
-                                    </div>
-                                    <div class="s-wishlist">
-                                        <i class="fas fa-heart"></i><label>126</label>
+            <section class="section-01">
+                <div class="container-xl">
+                    <div class="row">
+                        <div class="col-md-6 col-12 left">
+                            <h1 class="title">
+                                @Html.DisplayFor(model => model.TenTour)
+                            </h1>
+                            <div class="short-rating">
+                                <div class="s-rate">
+                                    <span>9</span>
+                                    <div class="s-comment">
+                                        <h4>Tuyệt vời</h4>
+                                        <p>358 quan tâm</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-12 right">
-                                <div class="group-price">
-                                    <div class="or-price">
-                                        <p>
-                                            Giá <span class="tour-item__price--old__number"> @Html.DisplayFor(model => model.Gia)</span>/
-                                            khách
-                                        </p>
-                                    </div>
-                                    <div class="sale-price">
-                                        <p>
-                                            <span class="price"> @Html.DisplayFor(model => model.Gia)</span>/
-                                            khách
-                                        </p>
-                                    </div>
-                                    <div class="saving">
-                                    </div>
-                                </div>
-                                <div class="group-add-cart">
-                                    <a href="/Booking/TourBooking?tourId=bc6877dc-94e3-4848-af72-74c7440820ce&amp;FS=0"
-                                       class="add-to-cart btn btn-primary
-                                            btn-sm" data-toggle="modal"
-                                       data-target="#selectOptionTour">
-                                        <i class="fal fa-shopping-cart"></i>
-                                        <label>
-                                            Đặt ngay
-                                        </label>
-                                    </a>
-                                    <a href="#" class="add-to-group"
-                                       data-bs-toggle="modal"
-                                       data-bs-target="#supportModal">
-                                        <label>Liên hệ tư vấn</label>
-                                    </a>
+                                <div class="s-wishlist">
+                                    <i class="fas fa-heart"></i><label>126</label>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6 col-12 right">
+                            <div class="group-price">
+                                <div class="or-price">
+                                    <p>
+                                        Giá <span class="tour-item__price--old__number"> @Html.DisplayFor(model => model.Gia)</span>/
+                                        khách
+                                    </p>
+                                </div>
+                                <div class="sale-price">
+                                    <p>
+                                        <span class="price"> @Html.DisplayFor(model => model.Gia)</span>/
+                                        khách
+                                    </p>
+                                </div>
+                                <div class="saving">
+                                </div>
+                            </div>
+                            <div class="group-add-cart">
+                                <a href="/Booking/TourBooking?tourId=bc6877dc-94e3-4848-af72-74c7440820ce&amp;FS=0"
+                                   class="add-to-cart btn btn-primary
+                                            btn-sm" data-toggle="modal"
+                                   data-target="#selectOptionTour">
+                                    <i class="fal fa-shopping-cart"></i>
+                                    <label>
+                                        Đặt ngay
+                                    </label>
+                                </a>
+                                <a href="#" class="add-to-group"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#supportModal">
+                                    <label>Liên hệ tư vấn</label>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </section>
+                </div>
+            </section>
 
 
-                <section class="section-02">
+            <section class="section-02">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-12 col-sm-12 left">
+                            <div class="image">
+                                <img src="@Html.DisplayFor(model => model.Hinh)" class="img-fluid" alt="image">
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-12 col-sm-12 right">
+                            <div class="row gy-4">
+                                <div class="col-md-12 col-sm-12 small">
+                                    <div class="row" style="display:flex;">
+                                        <div class="col-6">
+                                            <div class="image image2">
+                                                <img src="@Html.DisplayFor(model => model.Hinh2)" class="img-fluid" alt="image">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="image image2">
+                                                <img src="@Html.DisplayFor(model => model.Hinh3)" class="img-fluid" alt="image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        <div class="tab-panels">
+            <div class="overview active">
+
+                <section class="section-03 mb-5">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-7 col-md-12 col-sm-12 left">
-                                <div class="image">
-                                    <img src="@Html.DisplayFor(model => model.Hinh)" class="img-fluid" alt="image">
+                            <div class="col-md-5 col-12 left">
+
+                                <p>@Html.DisplayFor(model => model.NoiDung)</p>
+                                <p></p>
+
+                                <div class="box-code d-lg-none">
+                                    <div class="d-flex flex-column">
+                                        <span>Mã tour:</span>
+                                        <span class="fw-bold"> @Html.DisplayFor(model => model.LoaiTour.TenLoaiTour)</span>
+                                    </div>
+                                    <i class="icon icon--ticket"></i>
+                                </div>
+                                <div class="box-order">
+                                    <div class="time">
+                                        <p>Khởi hành <b>@Html.DisplayFor(model => model.NgayKhoiHanh)</b></p>
+                                        <p>Thời gian <b>@Html.DisplayFor(model => model.ThoiGian)</b></p>
+                                        <p>
+                                            Nơi khởi hành <b>
+                                                TP. Hồ Chí
+                                                Minh
+                                            </b>
+                                        </p>
+                                        <p>
+                                            Số chỗ còn nhận <b>@Html.DisplayFor(model => model.SoCho)</b>
+                                        </p>
+                                        <p>
+                                            Khách Sạn <b>@*@Html.DisplayFor(model => model.KSan.TenKhachSan)*@</b>
+                                        </p>
+                                    </div>
+                                    <div class="calendar">
+                                        <input type="date" name="name" value="" style="width: 20px" />
+                                    </div>
+                                </div>
+                                <div class="box-support">
+                                    <label>Quý khách cần hỗ trợ?</label>
+                                    <div class="group-contact">
+                                        <a href="https://webcall.talking.vn/frame-click-to-call/new?code=tCEZl1-MKPuA6JU-czVAScCb0pPkHmPt"
+                                           onclick="javascript:window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667');return
+                                                    false;" target="_blank"
+                                           class="phone">
+                                            <i class="icon icon--phone"></i>
+                                            <p>
+                                                Gọi miễn phí <br>qua
+                                                internet
+                                            </p>
+                                        </a>
+                                        <a href="mailto:info@vietravel.com"
+                                           class="mail">
+                                            <i class="icon icon--mail"></i>
+                                            <p>
+                                                Gửi yêu cầu <br>hỗ trợ
+                                                ngay
+                                            </p>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-md-12 col-sm-12 right">
-                                <div class="row gy-4">
-                                    <div class="col-md-12 col-sm-12 small">
-                                        <div class="row" style="display:flex;">
-                                            <div class="col-6">
-                                                <div class="image image2">
-                                                    <img src="@Html.DisplayFor(model => model.Hinh2)" class="img-fluid" alt="image">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="image image2">
-                                                    <img src="@Html.DisplayFor(model => model.Hinh3)" class="img-fluid" alt="image">
-                                                </div>
+                            <div class="col-md-7 col-12 right">
+
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </section>
+
+
+
+
+
+
+        </div>
+        <div class="map-route">
+
+            <section class="section-06 mb-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-12">
+                            <h2 class="mb-4">Lịch trình</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section-07 mb-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-12" style="width:100%;">
+                         @Html.Action("ListChang", "Tour", new { id = Model.ID});  
+
+                        </div>
+                    </div>   
+                </div>
+            
+            </section>
+
+
+            <section class="section-08 mb-5">
+                <div class="container-xl">
+                    <div class="row">
+                        <div class="col-md-6 col-12 left">
+                            <h2 class="mb-4">Chi tiết tour</h2>
+                            <div class="tour">
+                                <div class="detail-tour">
+                                    <h3 class="tt">
+                                        Thông tin chuyến
+                                        bay
+                                    </h3>
+                                    <div class="detail-tour-inner
+                                                    goto ">
+                                        <div class="date">
+                                            <span>Ngày đi -</span>
+                                            @*<b>@Html.DisplayFor(model => model.MayBay.GioDi) </b>*@
+                                        </div>
+                                        <div class="from">
+                                            <h4>
+                                            </h4>
+                                            <span>
+                                                <img src="https://media.travel.com.vn/ImageAirlines/logo_VIETRAVELAIRLINES.png"
+                                                     class="flight-logo"
+                                                     alt="image">
+                                            </span>
+                                            <h4>
+                                            </h4>
+                                        </div>
+                                        <div class="time">
+                                            <h4>13:25</h4>
+                                            <span>Bay thẳng</span>
+                                            <h4>14:20</h4>
+                                        </div>
+                                        <div class="p-line">
+                                            <span>
+                                                <img src="~/Content/images/go.png"
+                                                     alt="image">
+                                            </span>
+                                            <span>
+                                                <img src="~/Content/images/p.png"
+                                                     alt="image">
+                                            </span>
+                                            <span>
+                                                <img src="~/Content/images/to.png"
+                                                     alt="image">
+                                            </span>
+                                        </div>
+                                        <div class="cb">
+                                            <h3>Chuyến bay</h3>
+                                            @*  <p>@Html.DisplayFor(model => model.MayBay.TenChuyenBay)</p>*@
+                                        </div>
+                                    </div>
+                                    <div class="detail-tour-inner
+                                                    comeback">
+                                        <div class="date">
+                                            <span>Ngày về -</span>
+                                            @* <b>@Html.DisplayFor(model => model.MayBay.GIoDen)</b>*@
+                                        </div>
+                                        <div class="from">
+                                            <h4>
+                                            </h4>
+                                            <span>
+                                                <img src="https://media.travel.com.vn/ImageAirlines/logo_VIETRAVELAIRLINES.png"
+                                                     class="flight-logo"
+                                                     alt="image">
+                                            </span>
+                                            <h4>
+                                            </h4>
+                                        </div>
+                                        <div class="time">
+                                            <h4>14:55</h4>
+                                            <span>Bay thẳng</span>
+                                            <h4>15:50</h4>
+                                        </div>
+                                        <div class="p-line">
+                                            <span>
+                                                <img src="~/Content/images/go.png"
+                                                     alt="image">
+                                            </span>
+                                            <span>
+                                                <img src="~/Content/images/p.png"
+                                                     alt="image">
+                                            </span>
+                                            <span>
+                                                <img src="~/Content/images/to.png"
+                                                     alt="image">
+                                            </span>
+                                        </div>
+                                        <div class="cb">
+                                            <h3>Chuyến bay</h3>
+                                            @* <p>@Html.DisplayFor(model => model.MayBay.TenChuyenBay)</p>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="more-info more-info-1
+                                                mt-5">
+                                    <h3 class="tt">
+                                        Thông tin tập
+                                        trung
+                                    </h3>
+                                    <div class="block">
+                                        <span>Ngày giờ tập trung</span>
+                                        <div class="info">
+                                            <h3>11:25</h3>
+                                            <p>19/10/2022</p>
+                                        </div>
+                                    </div>
+                                    <div class="block">
+                                        <span>Nơi tập trung</span>
+                                        <div class="info">
+                                            <h3>Sân bay</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12 right">
+                            <h2>Giá tour &amp; phụ thu phòng đơn</h2>
+                            <div class="table-price">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th class="l1">
+                                                Loại
+                                                khách
+                                            </th>
+                                            <th class="l2">
+                                                Giá tour
+                                            </th>
+                                            <th class="l3">Land tour</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Người lớn (Từ 12
+                                                tuổi trở lên)
+                                            </td>
+                                            <td class="t-price">
+                                                @Html.DisplayFor(model => model.GiaNguoiLon)
+                                                đ
+                                            </td>
+                                            <td class="l-price">0 đ</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Trẻ em (Từ 5 - 11
+                                                tuổi)
+                                            </td>
+                                            <td class="t-price">
+                                                @Html.DisplayFor(model => model.GiaTreEm)
+                                                đ
+                                            </td>
+                                            <td class="l-price">0 đ</td>
+                                        </tr>
+
+                                        <tr class="total">
+                                            <td>Phụ thu phòng đơn</td>
+                                            <td class="t-price">
+                                                700,000
+                                                đ
+                                            </td>
+                                            <td class="l-price">0 đ</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2 class="tt mt-3">
+                                Thông tin hướng dẫn
+                                viên
+                            </h2>
+                            <div class="table-price">
+                                <div class="more-info more-info-2">
+                                    <div class="block">
+                                        <span>HDV dẫn đoàn</span>
+                                        <div id="divThongTinHDV">
+                                            <div class="info"
+                                                 style="width:100%">
+                                                <p><b>@Html.DisplayFor(model => model.NhanVien.TenNV)</b></p>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-
-            </div>
-            <div class="tab-panels">
-                <div class="overview active">
-
-                    <section class="section-03 mb-5">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-5 col-12 left">
-
-                                    @{ string[] ps = Model.NoiDung.Split('.');
-
-                                        for (byte i = 0; i < ps.Length; i++)
-                                        {
-                            <p class="s-title-03 tour-des">@ps[i]</p> } }
-
-                                    <div class="box-code d-lg-none">
-                                        <div class="d-flex flex-column">
-                                            <span>Mã tour:</span>
-                                            <span class="fw-bold"> @Html.DisplayFor(model => model.LoaiTour.TenLoaiTour)</span>
-                                        </div>
-                                        <i class="icon icon--ticket"></i>
-                                    </div>
-                                    <div class="box-order">
-                                        <div class="time">
-                                            <p>Khởi hành <b>@Html.DisplayFor(model => model.NgayKhoiHanh)</b></p>
-                                            <p>Thời gian <b>@Html.DisplayFor(model => model.ThoiGian)</b></p>
-                                            <p>
-                                                Nơi khởi hành <b>
-                                                    TP. Hồ Chí
-                                                    Minh
-                                                </b>
-                                            </p>
-                                            <p>
-                                                Số chỗ còn nhận <b>@Html.DisplayFor(model => model.SoCho)</b>
-                                            </p>
-                                            <p>
-                                                Khách Sạn <b>@Html.DisplayFor(model => model.KSan.TenKhachSan)</b>
-                                            </p>
-                                        </div>
-                                        <div class="calendar">
-                                                <input type="date" name="name" value="" style="width: 20px" />                                            
-                                        </div>
-                                    </div>
-                                    <div class="box-support">
-                                        <label>Quý khách cần hỗ trợ?</label>
-                                        <div class="group-contact">
-                                            <a href="https://webcall.talking.vn/frame-click-to-call/new?code=tCEZl1-MKPuA6JU-czVAScCb0pPkHmPt"
-                                               onclick="javascript:window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=375,height=667');return
-                                                    false;" target="_blank"
-                                               class="phone">
-                                                <i class="icon icon--phone"></i>
-                                                <p>
-                                                    Gọi miễn phí <br>qua
-                                                    internet
-                                                </p>
-                                            </a>
-                                            <a href="mailto:info@vietravel.com"
-                                               class="mail">
-                                                <i class="icon icon--mail"></i>
-                                                <p>
-                                                    Gửi yêu cầu <br>hỗ trợ
-                                                    ngay
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7 col-12 right">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-
-
-
-
-
                 </div>
-                <div class="map-route">
+            </section>
 
-                    <section class="section-06 mb-5">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 col-12">
-                                    <h2 class="mb-4">Lịch trình</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="section-07 mb-5">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-4 col-12 left">
-                                    <div class="go-tour">
-                                        <div class="day day-01">
-                                            <div class="wrapper">
-                                                <span class="date-left">
-                                                    Ngày
-                                                </span>
-                                                <span class="date-center
-                                                        active">1</span>
-                                                <span class="date-right">
-                                                    <span class="date">19/10/2022</span>
-                                                    <span class="location">
-                                                        @Html.DisplayFor(model => model.LichTrinh.Moc1)
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="day day-02">
-                                            <div class="wrapper">
-                                                <span class="date-left">
-                                                    Ngày
-                                                </span>
-                                                <span class="date-center
-                                                        active">2</span>
-                                                <span class="date-right">
-                                                    <span class="date">20/10/2022</span>
-                                                    <span class="location">
-                                                        @Html.DisplayFor(model => model.LichTrinh.Moc2)
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="day day-03">
-                                            <div class="wrapper">
-                                                <span class="date-left">
-                                                    Ngày
-                                                </span>
-                                                <span class="date-center
-                                                        active">3</span>
-                                                <span class="date-right">
-                                                    <span class="date">21/10/2022</span>
-                                                    <span class="location">
-                                                        @Html.DisplayFor(model => model.LichTrinh.Moc3)
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="day day-01">
-                                            <div class="wrapper">
-                                                <span class="date-left">
-                                                    Ngày
-                                                </span>
-                                                <span class="date-center
-                                                        active">4</span>
-                                                <span class="date-right">
-                                                    <span class="date">19/10/2022</span>
-                                                    <span class="location">
-                                                        @Html.DisplayFor(model => model.LichTrinh.Moc4)
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="col-md-8 col-12 right
-                                        timeline-section">
-                                    <div>
-                                        <h2 id="day-01">
-                                            @Html.DisplayFor(model => model.LichTrinh.Moc1)
-                                        </h2>
-                                        <div class="excerpt">
-                                            <span class="line"></span>
-
-                                            <div style="text-align:justify">
-                                                <div>
-                                                    -  @Html.DisplayFor(model => model.LichTrinh.CTMoc1)
-                                                    &nbsp;
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="group-services hashCode
-                                                d-none">
-                                            <div class="item">
-                                                <i class="icon
-                                                        icon--calendar"></i>
-                                                <label>Khách sạn</label>
-                                                <p> @Html.DisplayFor(model => model.KSan.TenKhachSan)</p>
-                                            </div>
-                                            <div class="item">
-                                                <i class="icon icon--fire"></i>
-                                                <label>Bữa ăn</label>
-                                                <p>1 bửa trưa, 1 bửa tối.</p>
-                                            </div>
-                                            <div class="item">
-                                                <i class="icon icon--map"></i>
-                                                <label>Điểm tham quan</label>
-                                                <p>1 địa điểm</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h2 id="day-02">
-                                            @Html.DisplayFor(model => model.LichTrinh.Moc2)
-                                        </h2>
-                                        <div class="excerpt">
-                                            <span class="line"></span>
-                                            <title></title>
-
-
-                                            <div style="text-align:justify">
-                                                <div>
-                                                    - @Html.DisplayFor(model => model.LichTrinh.Moc2)
-                                                    <br />
-                                                    &nbsp;
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="group-services hashCode
-                                                d-none">
-                                            <div class="item">
-                                                <i class="icon
-                                                        icon--calendar"></i>
-                                                <label>Khách sạn</label>
-                                                <p> @Html.DisplayFor(model => model.KSan.TenKhachSan)</p>
-                                            </div>
-                                            <div class="item">
-                                                <i class="icon icon--fire"></i>
-                                                <label>Bữa ăn</label>
-                                                <p>1 bửa trưa, 1 bửa tối.</p>
-                                            </div>
-                                            <div class="item">
-                                                <i class="icon icon--map"></i>
-                                                <label>Điểm tham quan</label>
-                                                <p>1 địa điểm</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h2 id="day-03">
-                                            @Html.DisplayFor(model => model.LichTrinh.Moc3)
-                                        </h2>
-                                        <div class="excerpt">
-                                            <span class="line"></span>
-
-
-
-                                            <div style="text-align:justify">
-                                                <div>
-                                                    - @Html.DisplayFor(model => model.LichTrinh.Moc3)
-                                                    <br>
-                                                    &nbsp;
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="group-services hashCode
-                                                d-none">
-                                            <div class="item">
-                                                <i class="icon
-                                                        icon--calendar"></i>
-                                                <label>Khách sạn</label>
-                                                <p> @Html.DisplayFor(model => model.KSan.TenKhachSan)</p>
-                                            </div>
-                                            <div class="item">
-                                                <i class="icon icon--fire"></i>
-                                                <label>Bữa ăn</label>
-                                                <p>1 bửa trưa, 1 bửa tối.</p>
-                                            </div>
-                                            <div class="item">
-                                                <i class="icon icon--map"></i>
-                                                <label>Điểm tham quan</label>
-                                                <p>1 địa điểm</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h2 id="day-01">
-                                            @Html.DisplayFor(model => model.LichTrinh.Moc4)
-                                        </h2>
-                                        <div class="excerpt">
-                                            <span class="line"></span>
-
-                                            <div style="text-align:justify">
-                                                <div>
-                                                    -  @Html.DisplayFor(model => model.LichTrinh.CTMoc4)
-                                                    &nbsp;
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="group-services hashCode
-                                                d-none">
-                                            <div class="item">
-                                                <i class="icon
-                                                        icon--calendar"></i>
-                                                <label>Khách sạn</label>
-                                                <p> @Html.DisplayFor(model => model.KSan.TenKhachSan)</p>
-                                            </div>
-                                            <div class="item">
-                                                <i class="icon icon--fire"></i>
-                                                <label>Bữa ăn</label>
-                                                <p>1 bửa trưa, 1 bửa tối.</p>
-                                            </div>
-                                            <div class="item">
-                                                <i class="icon icon--map"></i>
-                                                <label>Điểm tham quan</label>
-                                                <p>1 địa điểm</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-
-
-                                        <title></title>
-
-
-                                        <h2 style="text-align:justify">
-                                            <span style="color:#e74c3c">
-                                                <strong>
-                                                    Lưu
-                                                    ý:
-                                                </strong>
-                                            </span>
-                                        </h2>
-                                        <ul>
-                                            <li style="text-align:justify">
-                                                Việc
-                                                điều chỉnh yêu cầu xét
-                                                nghiệm covid và mũi tiêm có
-                                                thể sẽ thay đổi theo quy
-                                                định hiện hành của Cơ quan
-                                                Quản lý Nhà nước có thẩm
-                                                quyền. Vui lòng liên hệ nhân
-                                                viên tư vấn để biết thêm chi
-                                                tiết.
-                                            </li>
-                                        </ul>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-
-                    <section class="section-08 mb-5">
-                        <div class="container-xl">
-                            <div class="row">
-                                <div class="col-md-6 col-12 left">
-                                    <h2 class="mb-4">Chi tiết tour</h2>
-                                    <div class="tour">
-                                        <div class="detail-tour">
-                                            <h3 class="tt">
-                                                Thông tin chuyến
-                                                bay
-                                            </h3>
-                                            <div class="detail-tour-inner
-                                                    goto ">
-                                                <div class="date">
-                                                    <span>Ngày đi -</span>
-                                                    <b>@Html.DisplayFor(model => model.MayBay.GioDi) </b>
-                                                </div>
-                                                <div class="from">
-                                                    <h4>
-                                                    </h4>
-                                                    <span>
-                                                        <img src="https://media.travel.com.vn/ImageAirlines/logo_VIETRAVELAIRLINES.png"
-                                                             class="flight-logo"
-                                                             alt="image">
-                                                    </span>
-                                                    <h4>
-                                                    </h4>
-                                                </div>
-                                                <div class="time">
-                                                    <h4>13:25</h4>
-                                                    <span>Bay thẳng</span>
-                                                    <h4>14:20</h4>
-                                                </div>
-                                                <div class="p-line">
-                                                    <span>
-                                                        <img src="~/Content/images/go.png"
-                                                             alt="image">
-                                                    </span>
-                                                    <span>
-                                                        <img src="~/Content/images/p.png"
-                                                             alt="image">
-                                                    </span>
-                                                    <span>
-                                                        <img src="~/Content/images/to.png"
-                                                             alt="image">
-                                                    </span>
-                                                </div>
-                                                <div class="cb">
-                                                    <h3>Chuyến bay</h3>
-                                                    <p>@Html.DisplayFor(model => model.MayBay.TenChuyenBay)</p>
-                                                </div>
-                                            </div>
-                                            <div class="detail-tour-inner
-                                                    comeback">
-                                                <div class="date">
-                                                    <span>Ngày về -</span>
-                                                    <b>@Html.DisplayFor(model => model.MayBay.GIoDen)</b>
-                                                </div>
-                                                <div class="from">
-                                                    <h4>
-                                                    </h4>
-                                                    <span>
-                                                        <img src="https://media.travel.com.vn/ImageAirlines/logo_VIETRAVELAIRLINES.png"
-                                                             class="flight-logo"
-                                                             alt="image">
-                                                    </span>
-                                                    <h4>
-                                                    </h4>
-                                                </div>
-                                                <div class="time">
-                                                    <h4>14:55</h4>
-                                                    <span>Bay thẳng</span>
-                                                    <h4>15:50</h4>
-                                                </div>
-                                                <div class="p-line">
-                                                    <span>
-                                                        <img src="~/Content/images/go.png"
-                                                             alt="image">
-                                                    </span>
-                                                    <span>
-                                                        <img src="~/Content/images/p.png"
-                                                             alt="image">
-                                                    </span>
-                                                    <span>
-                                                        <img src="~/Content/images/to.png"
-                                                             alt="image">
-                                                    </span>
-                                                </div>
-                                                <div class="cb">
-                                                    <h3>Chuyến bay</h3>
-                                                    <p>@Html.DisplayFor(model => model.MayBay.TenChuyenBay)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="more-info more-info-1
-                                                mt-5">
-                                            <h3 class="tt">
-                                                Thông tin tập
-                                                trung
-                                            </h3>
-                                            <div class="block">
-                                                <span>Ngày giờ tập trung</span>
-                                                <div class="info">
-                                                    <h3>11:25</h3>
-                                                    <p>19/10/2022</p>
-                                                </div>
-                                            </div>
-                                            <div class="block">
-                                                <span>Nơi tập trung</span>
-                                                <div class="info">
-                                                    <h3>Sân bay</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-12 right">
-                                    <h2>Giá tour &amp; phụ thu phòng đơn</h2>
-                                    <div class="table-price">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <th class="l1">
-                                                        Loại
-                                                        khách
-                                                    </th>
-                                                    <th class="l2">
-                                                        Giá tour
-                                                    </th>
-                                                    <th class="l3">Land tour</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Người lớn (Từ 12
-                                                        tuổi trở lên)
-                                                    </td>
-                                                    <td class="t-price">
-                                                        @Html.DisplayFor(model => model.GiaNguoiLon)
-                                                        đ
-                                                    </td>
-                                                    <td class="l-price">0 đ</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Trẻ em (Từ 5 - 11
-                                                        tuổi)
-                                                    </td>
-                                                    <td class="t-price">
-                                                        @Html.DisplayFor(model => model.GiaTreEm)
-                                                        đ
-                                                    </td>
-                                                    <td class="l-price">0 đ</td>
-                                                </tr>
-
-                                                <tr class="total">
-                                                    <td>Phụ thu phòng đơn</td>
-                                                    <td class="t-price">
-                                                        700,000
-                                                        đ
-                                                    </td>
-                                                    <td class="l-price">0 đ</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <h2 class="tt mt-3">
-                                        Thông tin hướng dẫn
-                                        viên
-                                    </h2>
-                                    <div class="table-price">
-                                        <div class="more-info more-info-2">
-                                            <div class="block">
-                                                <span>HDV dẫn đoàn</span>
-                                                <div id="divThongTinHDV">
-                                                    <div class="info"
-                                                         style="width:100%">
-                                                        <p><b>@Html.DisplayFor(model => model.HuongDanVien.TenHDV)</b></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                </div>
+        </div>
 
 
 
 
-            </div>
+    </div>
 
 
-    </main>
+</main>
 
 
 
@@ -663,12 +415,12 @@
 </p>
 
 <style>
-    *{
+    * {
         margin: 0;
         padding: 0;
     }
 
     .image2 {
-        margin:20px;    
+        margin: 20px;
     }
 </style>

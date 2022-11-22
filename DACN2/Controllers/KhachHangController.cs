@@ -16,68 +16,7 @@ namespace DACN2.Controllers
         // GET: NguoiDung
         MyDataDataContext data = new MyDataDataContext();
 
-        [HttpGet]
-        public ActionResult DangKy()
-        {
-
-            return View();
-        }
-        [HttpPost]
-        public ActionResult DangKy(FormCollection collection, KhachHang kh)
-        {
-            var MaKhachHang = Convert.ToInt32(collection["MaKhachHang"]);
-            var Ten = collection["Ten"];
-            var TenDangNhap = collection["TenDangNhap"];
-            var MatKhau = collection["MatKhau"];
-            var MatKhauXacNhan = collection["MatKhauXacNhan"];
-            var Email = collection["Email"];
-            var DiaChi = collection["DiaChi"];
-            var SDT = Convert.ToInt32(collection["SDT"]);
-/*            var ngaysinh = String.Format("{0:MM/dd/yyyy}", collection["ngaysinh"]);*/
-
-
-            if (String.IsNullOrEmpty(MatKhauXacNhan))
-                ViewData["NhapMKXN"] = "Phải nhập đủ thông tin!";
-            if (String.IsNullOrEmpty(Ten))
-                ViewData["NhapTen"] = "Phải nhập đủ họ tên";
-            if (SDT != 0)
-                ViewData["nhapDT"] = "Phải nhập số điện thoại";
-            if (String.IsNullOrEmpty(DiaChi))
-                ViewData["nhapDC"] = "Phải nhập địa chỉ";
-            if (String.IsNullOrEmpty(Email))
-                ViewData["nhapEmail"] = "Phải nhập Email";
-
-            if (String.IsNullOrEmpty(TenDangNhap))
-                ViewData["NhapTK"] = "Phải nhập tên đăng nhập";
-            if (String.IsNullOrEmpty(MatKhau))
-                ViewData["nhapMK"] = "Phải nhập mật khẩu";
-            if (MatKhau.Length > 8)
-                ViewData["dodaiMK"] = "mật khẩu phải nhiều hơn 8 ký tự";
-/*            if (String.IsNullOrEmpty(ngaysinh))
-                ViewData["nhapNS"] = "Phải nhập ngày sinh";*/
-
-            else
-            {
-                if (!MatKhau.Equals(MatKhauXacNhan))
-                {
-                    ViewData["MatKhauGiongNhau"] = "Mật khẩu và mật khẩu xác nhận phải giống nhau";
-                }
-                else
-                {
-                    kh.MaKhachHang = MaKhachHang;
-                    kh.Ten = Ten;
-                    kh.Email = Email;
-                    kh.DiaChi = DiaChi;
-                    kh.SDT = SDT;
-/*                    kh.ngaysinh = DateTime.Parse(ngaysinh);
-                    kh.id = Convert.ToInt32(collection["id"]);*/
-                    data.KhachHangs.InsertOnSubmit(kh);
-                    data.SubmitChanges();
-                    return RedirectToAction("Index");
-                }
-            }
-            return this.DangKy();
-        }
+        
         [HttpGet]
         public ActionResult DangNhap()
         {

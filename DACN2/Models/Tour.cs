@@ -10,15 +10,16 @@ namespace DACN2.Models
     public partial class Tour
     {
 
-        
-        public List<LoaiTour> LoaiTours = new List<LoaiTour>();
-        public List<KSan> LoaiKsan = new List<KSan>();
+
+        /*        public List<LoaiTour> LoaiTours = new List<LoaiTour>();
+                public List<KSan> LoaiKsan = new List<KSan>();
 
 
-        public List<HuongDanVien> HuongDanViens = new List<HuongDanVien>();
-        public List<DiaDiem> DiaDiems = new List<DiaDiem>();
-        public List<MayBay> MayBays = new List<MayBay>();
-        public List<LichTrinh> LichTrinhs = new List<LichTrinh>();
+                public List<NhanVien> HuongDanViens = new List<NhanVien>();
+                public List<DiaDiem> DiaDiems = new List<DiaDiem>();
+                public List<PhuongTien> MayBays = new List<PhuongTien>();
+                public List<LichTrinh> LichTrinhs = new List<LichTrinh>();*/
+                public List<Chang> Chang = new List<Chang>();
 
 
 

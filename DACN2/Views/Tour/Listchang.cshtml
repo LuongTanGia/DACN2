@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DACN2.Models.Chang>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenChang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiDungChang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaChang)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenChang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiDungChang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaChang)
+        </td>
+        
+    </tr>
+}
+
+</table>

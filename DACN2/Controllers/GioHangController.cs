@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using DACN2.Models;
 
 
-namespace QuanLyCH.Controllers
+namespace DACN2.Controllers
 {
     public class GioHangController : Controller
     {
@@ -75,6 +75,58 @@ namespace QuanLyCH.Controllers
 
 
         }
+
+
+        [HttpGet]
+        
+        public ActionResult DangKy()
+        {
+            for (int i = TongSoLuong(); i >= 0; i--)
+            {
+                if (TongSoLuong() - i != 0)
+                {
+                    return View();
+                }
+                
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult DangKy(FormCollection collection, NguoiDiTour khs)
+        {
+           
+                for (int i = TongSoLuong(); i >= 0;)
+                {
+                    var Ten = collection["Ten"];
+                    var Email = collection["Email"];
+                    var DiaChi = collection["DiaChi"];
+                    var SDT = Convert.ToInt32(collection["SDT"]);
+
+                    if (string.IsNullOrEmpty(Ten))
+                    {
+                        ViewData["Error"] = "Don't empty!";
+                    }
+                    else
+                    {
+                        khs.Ten = Ten.ToString();
+                        khs.Email = Email.ToString();
+                        khs.SDT = SDT;
+
+                        data.NguoiDiTours.InsertOnSubmit(khs);
+                        data.SubmitChanges();
+                        
+                            return RedirectToAction("DangKy",i--);
+                    }
+                
+                }
+
+               
+                
+
+            
+            return RedirectToAction("Index");
+        }
+        
         public ActionResult Giohang()
         {
             ViewBag.Tongsoluongsanpham = TongSoLuongSanPham();
@@ -94,6 +146,7 @@ namespace QuanLyCH.Controllers
             ViewBag.Tongtien = TongTien();
             return PartialView(lstGiohang);
         }
+        
         public ActionResult GiohangPartial()
         {
 
@@ -130,6 +183,7 @@ namespace QuanLyCH.Controllers
             }
             return RedirectToAction("GioHang");
         }
+        
         public ActionResult XoaTatCaGiohang()
         {
             List<GioHang> lstGiohang = Laygiohang();
@@ -137,30 +191,28 @@ namespace QuanLyCH.Controllers
             return RedirectToAction("GioHang");
         }
         [HttpGet]
+        [HttpPost]
         public ActionResult DatHang()
         {
-           /* if (Session["Taikhoan"] == null || Session["TaiKhoan"].ToString() == "")
-            {
-                return RedirectToAction("DangNhap", "NguoiDung");
-            }*/
             if (Session["Giohang"] == null)
             {
                 return RedirectToAction("Index", "Tour");
             }
             List<GioHang> lstGiohang = Laygiohang();
+            
             ViewBag.Tongsoluong = TongSoLuong();
             ViewBag.Tongtien = TongTien();
             ViewBag.TienGiam1 = TongTien() * 0.7;
             ViewBag.TienGiam2 = TongTien() * 0.5;
             ViewBag.Tongsoluongsanpham = TongSoLuongSanPham();
             return View(lstGiohang);
-
+            
         }
         public ActionResult DatHang(System.Web.Mvc.FormCollection collection)
         {
             DatTour dt = new DatTour();
             KhachHang kh = (KhachHang)Session["Taikhoan"];
-            Tour s = new Tour();
+            
             List<GioHang> gh = Laygiohang();                      
             dt.NgayDat = DateTime.Now;
             dt.MaKhachHang = kh.MaKhachHang;
@@ -172,10 +224,7 @@ namespace QuanLyCH.Controllers
                 ChiTietDatTour ctdh = new ChiTietDatTour();
                 ctdh.MaDatTour = dt.MaDatTour;
                 ctdh.ID= item.ID;
-                ctdh.SoCho = (item.iSoluongNguoiLon + item.iSoluongTreEm);
-                ctdh.Gia = (decimal)item.dThanhtien;
-                s = data.Tours.Single(n => n.ID == item.ID);
-                s.SoCho -= ctdh.SoCho;
+                
                 data.SubmitChanges();
                 data.ChiTietDatTours.InsertOnSubmit(ctdh);
                 tong += item.dThanhtien;
