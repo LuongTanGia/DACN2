@@ -27,11 +27,49 @@ namespace DACN2.Controllers
             return PartialView(sptl);
 
         }
+        private decimal TongTien()
+        {
+            decimal tt = 0;
+            List<LichTrinh> lst = new List<LichTrinh>();
+
+            tt = (decimal)lst.Sum(n => n.PhuongTien.GiaPT);
+
+            return tt;
+
+
+        }
         public ActionResult ListLichTrinh()
         {
+            ViewBag.Tongtien = TongTien();
             var sptl = from ss in data.LichTrinhs select ss;
             return PartialView(sptl);
 
         }
+        public ActionResult ListPhuongTien()
+        {
+            var sptl = from ss in data.PhuongTiens select ss;
+            return PartialView(sptl);
+
+        }
+        public ActionResult ListDiaDiem()
+        {
+            var sptl = from ss in data.DiaDiems select ss;
+            return PartialView(sptl);
+
+        }
+        
+        public ActionResult ListAnUong()
+        {
+            var sptl = from ss in data.AnUongs select ss;
+            return PartialView(sptl);
+
+        }
+        public ActionResult ListKhachSan()
+        {
+            var sptl = from ss in data.KSans select ss;
+            return PartialView(sptl);
+
+        }
+
     }
 }

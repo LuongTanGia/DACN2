@@ -77,6 +77,7 @@ namespace DACN2.Controllers
         }
 
 
+
         [HttpGet]
         
         public ActionResult DangKy()
@@ -115,7 +116,7 @@ namespace DACN2.Controllers
                         data.NguoiDiTours.InsertOnSubmit(khs);
                         data.SubmitChanges();
                         
-                            return RedirectToAction("DangKy",i--);
+                        return RedirectToAction("DangKy");
                     }
                 
                 }

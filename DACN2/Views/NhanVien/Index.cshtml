@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Admin/View.cshtml";
+}
+
+<h2>Phuong Tien</h2>
+<hr />
+@Html.Action("ListPhuongTien", "NhanVien")
+
+<h2>Dia Diem</h2>
+<hr />
+@Html.Action("ListDiaDiem", "NhanVien")
+
+<h2>Khach San</h2>
+<hr />
+@Html.Action("ListKhachSan", "NhanVien")
+
+<h2>An Uong</h2>
+<hr />
+@Html.Action("ListAnUong", "NhanVien")
+
+

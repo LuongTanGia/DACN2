@@ -58,7 +58,7 @@
                 </div>
 
                 <ul class="nav">
-                    <li class="active">
+                    <li >
                         @Html.ActionLink("Danh Sachh Tour", "ListTour", "NhanVien")
                     </li>
                     <li>
@@ -68,7 +68,7 @@
                         @Html.ActionLink("Danh Sachh Linh Trinh", "ListLichTrinh", "NhanVien")
                     </li>
                     <li>
-                        @Html.ActionLink("Home", "Index", "Tour")
+                        @Html.ActionLink("Thong Tin Khac", "Index", "NhanVien")
                     </li>
                     <li>
                         @Html.ActionLink("Home", "Index", "Tour")
@@ -132,34 +132,21 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="">
-                                    <p>Account</p>
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-                                        Dropdown
-                                        <b class="caret"></b>
-                                    </p>
+                            @if (Session["TaiKhoan"] != null)
+                            {
+                                <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-user"></i> </a></li>
 
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <p>Log out</p>
-                                </a>
-                            </li>
+                                <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-right-from-bracket"></i> </a></li>
+                                <li>@Html.ActionLink("Đăng Xuất", "DangXuat", "KhachHang")</li>
+
+                            }
+                            else
+                            {
+
+                                <li>@Html.ActionLink("Đăng Ký", "Dangky", "KhachHang")</li>
+
+                                <li>@Html.ActionLink("Đăng Nhập", "DangNhap", "KhachHang")</li>
+                            }
                             <li class="separator hidden-lg"></li>
                         </ul>
                     </div>
@@ -167,7 +154,7 @@
             </nav>
 
 
-            <div class="content">
+            <div class="content" style="width:100%;">
                 @RenderBody()
             </div>
 

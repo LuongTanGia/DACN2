@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DACN2.Models.KSan>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListKhachSan</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenKhachSan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diachi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaKS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhuThuPhongDon)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhachSan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diachi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaKS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhuThuPhongDon)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MaKS }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MaKS }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MaKS })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

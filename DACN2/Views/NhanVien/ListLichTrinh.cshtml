@@ -21,6 +21,7 @@
         <th>
             @Html.DisplayNameFor(model => model.GiaLichTrinh)
         </th>
+
         <th>
             @Html.DisplayNameFor(model => model.MaPhuongTien)
         </th>
@@ -34,38 +35,58 @@
             @Html.DisplayNameFor(model => model.MaKS)
         </th>
         <th></th>
+
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+
+            @{
+                item.GiaLichTrinh = (item.KSan.GiaKS + item.PhuongTien.GiaPT + item.DiaDiem.ChiPhiDD + item.AnUong.ChiPhi);
+            }
+
+            <td class="td">
                 @Html.DisplayFor(modelItem => item.TenLichTrinh)
             </td>
-            <td>
+            <td class="td">
                 @Html.DisplayFor(modelItem => item.Chang.TenChang)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GiaLichTrinh)
+
+
+            <td class="td">
+                @String.Format("{0:0,0}", item.GiaLichTrinh)
+
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhuongTien.TenPhuongTien)
+
+            <td class="td">
+                @Html.DisplayFor(modelItem => item.PhuongTien.TenPhuongTien):
+                @Html.DisplayFor(modelItem => item.PhuongTien.GiaPT)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiaDiem.TenDiaDiem)
+            <td class="td">
+                @Html.DisplayFor(modelItem => item.DiaDiem.TenDiaDiem):
+                @Html.DisplayFor(modelItem => item.DiaDiem.ChiPhiDD)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AnUong.TenBuaAn)
+            <td class="td">
+                @Html.DisplayFor(modelItem => item.AnUong.TenBuaAn):
+                @Html.DisplayFor(modelItem => item.AnUong.ChiPhi)
             </td>
-            <td>
+            <td class="td">
                 @Html.DisplayFor(modelItem => item.KSan.TenKhachSan)
+                @Html.DisplayFor(modelItem => item.KSan.GiaKS)
             </td>
             <td style="display:flex">
                 @Html.ActionLink("Edit", "Edit", new { id = item.MaLichTrinh }) |
                 @Html.ActionLink("Details", "Details", new { id = item.MaLichTrinh }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.MaLichTrinh })
             </td>
+
+
         </tr>
+
+
     }
 
 </table>
+
+

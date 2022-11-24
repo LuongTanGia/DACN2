@@ -33,7 +33,7 @@ namespace DACN2.Controllers
                 ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
                 Session["TaiKhoan"] = kh;
 
-                return RedirectToAction("Index", "Tour");
+                return RedirectToAction("Index", "NhanVien");
 
             }
             else

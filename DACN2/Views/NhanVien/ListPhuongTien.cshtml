@@ -1,0 +1,59 @@
+﻿@model IEnumerable<DACN2.Models.PhuongTien>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListPhuongTien</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenPhuongTien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioDi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioDen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaPT)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenPhuongTien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioDi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioDen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaPT)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MaPhuongTien }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MaPhuongTien }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MaPhuongTien })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
