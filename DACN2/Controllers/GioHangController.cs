@@ -132,6 +132,7 @@ namespace DACN2.Controllers
         {
             ViewBag.Tongsoluongsanpham = TongSoLuongSanPham();
             List<GioHang> lstGiohang = Laygiohang();
+
             ViewBag.Tongsoluong = TongSoLuong();
             ViewBag.Tongtien = TongTien();
             ViewBag.TienGiam1 = TongTien() * 0.7;
@@ -214,14 +215,18 @@ namespace DACN2.Controllers
             DatTour dt = new DatTour();
             KhachHang kh = (KhachHang)Session["Taikhoan"];
             
-            List<GioHang> gh = Laygiohang();                      
+            List<GioHang> gh = Laygiohang();
+            List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
+            dt.SoCho = lstGiohang.Sum(n => (n.iSoluongNguoiLon + n.iSoluongTreEm));
             dt.NgayDat = DateTime.Now;
             dt.MaKhachHang = kh.MaKhachHang;
+            
             data.DatTours.InsertOnSubmit(dt);
             data.SubmitChanges();
             double tong = 0;
             foreach (var item in gh)
             {
+                
                 ChiTietDatTour ctdh = new ChiTietDatTour();
                 ctdh.MaDatTour = dt.MaDatTour;
                 ctdh.ID= item.ID;
@@ -230,9 +235,9 @@ namespace DACN2.Controllers
                 data.ChiTietDatTours.InsertOnSubmit(ctdh);
                 tong += item.dThanhtien;
             }
-            data.SubmitChanges();
+            data.SubmitChanges();   
             Session["Giohang"] = null;
-            return RedirectToAction("XacnhanDonHang", "Giohang");
+            return RedirectToAction("Index", "Giohang");
 
 
         }

@@ -70,6 +70,61 @@ namespace DACN2.Controllers
             return PartialView(sptl);
 
         }
+        public ActionResult ListNguoiDiTour(int id)
+        {
+            var sptl = from ss in data.NguoiDiTours where ss.MaDatTour == id select ss;
+            return PartialView(sptl);
 
+        }
+        public ActionResult ListDatTour()
+        {
+            var sptl = from ss in data.DatTours select ss;
+            return PartialView(sptl);
+
+        }
+        
+        public ActionResult ListKhachHang()
+        {
+            var sptl = from ss in data.KhachHangs select ss;
+            return PartialView(sptl);
+
+        }
+        /*public ActionResult Listchang(int id)
+        {
+            var sptl = from ss in data.Changs where ss.ID == id select ss;
+            return PartialView(sptl);
+
+        }*/
+
+        public ActionResult Chitietdonhang(int id)
+        {
+            var D_tour = data.DatTours.FirstOrDefault(m => m.MaDatTour == id);
+            return View(D_tour);
+        }
+        public ActionResult DangNhap()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DangNhap(FormCollection collection)
+        {
+            var TenDangNhap = collection["Email"];
+            var MatKhau = collection["MatKhau"];
+            NhanVien kh = data.NhanViens.SingleOrDefault(n => n.Email == TenDangNhap && n.MatKhau == MatKhau);
+            if (kh != null)
+            {
+                ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
+                Session["TaiKhoan"] = kh;
+
+                return RedirectToAction("Index", "NhanVien");
+
+            }
+            else
+            {
+                ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng";
+
+            }
+            return View();
+        }
     }
 }

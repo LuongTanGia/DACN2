@@ -18,6 +18,7 @@ namespace DACN2
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Tour", action = "Index", id = UrlParameter.Optional }
             );
+            
         }
     }
 }

@@ -2298,6 +2298,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Assets\css\style.css" />
     <Content Include="Views\Tour\BMT.jpg" />
     <Content Include="Views\Tour\danang.jpg" />
     <Content Include="Views\Tour\halong.jpg" />
@@ -2328,7 +2329,6 @@
     <Content Include="Views\Tour\LoaiSanPham.cshtml" />
     <Content Include="Views\Tour\SPTheoLoai.cshtml" />
     <Content Include="Views\Tour\DonHang.cshtml" />
-    <Content Include="Views\Tour\Chitietdonhang.cshtml" />
     <Content Include="Views\GioHang\DangKy.cshtml" />
     <Content Include="Views\Tour\Listchang.cshtml" />
     <Content Include="Views\NhanVien\ListChang.cshtml" />
@@ -2341,6 +2341,10 @@
     <Content Include="Views\NhanVien\ListKhachSan.cshtml" />
     <Content Include="Views\NhanVien\ListPhuongTien.cshtml" />
     <Content Include="Views\NhanVien\Index.cshtml" />
+    <Content Include="Views\NhanVien\ListNguoiDiTour.cshtml" />
+    <Content Include="Views\NhanVien\ListDatTour.cshtml" />
+    <Content Include="Views\NhanVien\DangNhap.cshtml" />
+    <Content Include="Views\NhanVien\ListKhachHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

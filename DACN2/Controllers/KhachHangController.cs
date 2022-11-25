@@ -28,12 +28,12 @@ namespace DACN2.Controllers
             var TenDangNhap = collection["TenDangNhap"];
             var MatKhau = collection["MatKhau"];
             KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.TenDangNhap == TenDangNhap && n.MatKhau == MatKhau);
-            if (kh != null)
+            if (kh != null )
             {
                 ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
                 Session["TaiKhoan"] = kh;
 
-                return RedirectToAction("Index", "NhanVien");
+                return RedirectToAction("Index", "Tour");
 
             }
             else

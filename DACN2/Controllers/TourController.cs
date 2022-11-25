@@ -265,11 +265,7 @@ namespace DACN2.Controllers
             return View(dh);
 
         }*/
-        public ActionResult Chitietdonhang(int id)
-        {
-            var D_tour = data.DatTours.FirstOrDefault(m => m.MaDatTour == id);
-            return View(D_tour);
-        }
+        
 
     }
 }
