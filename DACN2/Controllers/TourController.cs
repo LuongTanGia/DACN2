@@ -24,7 +24,7 @@ namespace DACN2.Controllers
         {
             Tour Tour = new Tour();
             var D_tour = data.Tours.FirstOrDefault(m => m.ID == id);
-            Tour.Chang = data.Changs.ToList(); 
+            /*Tour.Chang = data.Changs.ToList(); */
             
             return View(D_tour);
         }
@@ -43,25 +43,31 @@ namespace DACN2.Controllers
         }
         public ActionResult Create()
         {
-            /*Tour Tour = new Tour();            
-            Tour.LoaiTours = data.LoaiTours.ToList();
-            Tour.LoaiKsan = data.KSans.ToList();
+            Tour Tour = new Tour();
+            /* 
+             Tour.LoaiKsan = data.KSans.ToList();
+
+             Tour.MayBays = data.PhuongTiens.ToList();
+             Tour.DiaDiems = data.DiaDiems.ToList();
+             Tour.LichTrinhs = data.LichTrinhs.ToList();*/
             Tour.HuongDanViens = data.NhanViens.ToList();
-            Tour.MayBays = data.PhuongTiens.ToList();
-            Tour.DiaDiems = data.DiaDiems.ToList();
-            Tour.LichTrinhs = data.LichTrinhs.ToList();*/
-            return View();
+            Tour.LoaiTours = data.LoaiTours.ToList();
+            return View(Tour);
             
         }
         [HttpPost]
         public ActionResult Create(FormCollection collection, Tour s)
         {
-            /*s.LoaiTours = data.LoaiTours.ToList();
+            /*
             s.LoaiKsan = data.KSans.ToList();
-            s.HuongDanViens = data.NhanViens.ToList();
             s.MayBays = data.PhuongTiens.ToList();
             s.DiaDiems = data.DiaDiems.ToList();
             s.LichTrinhs = data.LichTrinhs.ToList();*/
+
+            s.HuongDanViens = data.NhanViens.ToList();
+            s.LoaiTours = data.LoaiTours.ToList();
+            s.MaLoaiTour = int.Parse(Request.Form["MaLoaiTour"]);
+            s.MaNV = int.Parse(Request.Form["MaNV"]);
 
             var E_TenTour = collection["TenTour"];
             var E_Gia = Convert.ToInt32(collection["Gia"]);
@@ -74,7 +80,7 @@ namespace DACN2.Controllers
             
             var E_Hinh = collection["Hinh"];
             
-            var E_MaNV = int.Parse(Request.Form["MaNV"]);
+           
             /*--------*/
             var E_NoiKhoiHanh = collection["NoiKhoiHanh"];
             var E_GiaNguoiLon = Convert.ToDecimal(collection["GiaNguoiLon"]);
@@ -96,11 +102,11 @@ namespace DACN2.Controllers
                 s.SoCho = E_SoCho;
                 s.NoiDung = E_NoiDung.ToString();
                 
-                s.MaLoaiTour = E_MaLoaiTour;
-                
+
+
                 s.Hinh = E_Hinh.ToString();
 
-                s.MaNV = E_MaNV;
+               
                 /*--------*/
                 s.NoiKhoiHanh = E_NoiKhoiHanh.ToString();
                 

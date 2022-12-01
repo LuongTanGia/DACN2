@@ -17,7 +17,49 @@ namespace DACN2.Controllers
         }
         public ActionResult ListChang()
         {
+
+            
+
             var sptl = from ss in data.Changs select ss;
+            List<Chang> changs = data.Changs.Where(s => s.GiaChang != null ).ToList();
+            
+
+            if (changs.Count > 0)   
+            {
+                for (int i = 0; i < changs.Count; i++)
+                {
+                    Chang chang = data.Changs.FirstOrDefault(s => s.MaChang == changs[i].MaChang);
+       
+
+                    if (chang != null)
+                    {
+                        decimal tongTien = 0;
+                        List<LichTrinh> lichTrinhs = data.LichTrinhs.Where(s => s.MaChang == chang.MaChang ).ToList();
+                        if (lichTrinhs.Count > 0)
+                        {
+
+                            for (int j = 0; j < lichTrinhs.Count; j++)
+                            {
+
+                                LichTrinh lichTrinh = data.LichTrinhs.FirstOrDefault(s => s.MaLichTrinh == lichTrinhs[j].MaLichTrinh && s.GiaLichTrinh != null);
+                                if (lichTrinh != null)
+                                {
+                                    tongTien += (decimal)lichTrinh.GiaLichTrinh;
+                                }
+
+                                if (tongTien > 0)
+                                {
+                                    chang.GiaChang = tongTien;
+                                    UpdateModel(chang);
+                                    data.SubmitChanges();
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+
             return PartialView(sptl);
 
         }
@@ -27,7 +69,7 @@ namespace DACN2.Controllers
             return PartialView(sptl);
 
         }
-        private decimal TongTien()
+       /* private decimal TongTien()
         {
             decimal tt = 0;
             List<LichTrinh> lst = new List<LichTrinh>();
@@ -37,14 +79,14 @@ namespace DACN2.Controllers
             return tt;
 
 
-        }
-        public ActionResult ListLichTrinh()
+        }*/
+       /* public ActionResult ListLichTrinh()
         {
             ViewBag.Tongtien = TongTien();
             var sptl = from ss in data.LichTrinhs select ss;
             return PartialView(sptl);
 
-        }
+        }*/
         public ActionResult ListPhuongTien()
         {
             var sptl = from ss in data.PhuongTiens select ss;
@@ -95,7 +137,117 @@ namespace DACN2.Controllers
             return PartialView(sptl);
 
         }*/
+       /* private decimal TongTien()
+        {
+            decimal tt = 0;
+            List<LichTrinh> lst = new List<LichTrinh>();
 
+            tt = (decimal)lst.Sum(n => n.PhuongTien.GiaPT);
+
+            return tt;
+
+
+        }*/
+        public ActionResult ListLichTrinh()
+        {
+            /*ViewBag.Tongtien = TongTien();*/
+            var sptl = from ss in data.LichTrinhs select ss;
+            List<LichTrinh> lichTrinhs = data.LichTrinhs.Where(s => s.GiaLichTrinh == null).ToList();
+            if (lichTrinhs.Count > 0)
+            {
+                for (int i = 0; i < lichTrinhs.Count; i++)
+                {
+                    LichTrinh lichTrinh = data.LichTrinhs.FirstOrDefault(s => s.MaLichTrinh == lichTrinhs[i].MaLichTrinh);
+                    decimal tongTien = 0;
+                    if (lichTrinh != null)
+                    {
+                        AnUong anUong = data.AnUongs.FirstOrDefault(s => s.MaAnUong == lichTrinh.MaAnUong && s.ChiPhi > 0);
+                        if (anUong != null)
+                        {
+                            tongTien += (decimal)anUong.ChiPhi;
+                        }
+                        KSan kSan = data.KSans.FirstOrDefault(s => s.MaKS == lichTrinh.MaKS && s.GiaKS > 0);
+                        if (kSan != null)
+                        {
+                            tongTien += (decimal)kSan.GiaKS;
+                        }
+                        DiaDiem diaDiem = data.DiaDiems.FirstOrDefault(s => s.MaDiaDiem == lichTrinh.MaDiaDiem
+                        && s.ChiPhiDD > 0);
+                        if (diaDiem != null)
+                        {
+                            tongTien += (decimal)diaDiem.ChiPhiDD;
+                        }
+                        PhuongTien phuongTien = data.PhuongTiens.FirstOrDefault(s => s.MaPhuongTien == lichTrinh.MaPhuongTien
+                        && s.GiaPT > 0);
+                        if (phuongTien != null)
+                        {
+                            tongTien += (decimal)phuongTien.GiaPT;
+                        }
+                        if (tongTien > 0)
+                        {
+                            lichTrinh.GiaLichTrinh = tongTien;
+                            UpdateModel(lichTrinh);
+                            data.SubmitChanges();
+                        }
+                    }
+                }
+            }
+            return PartialView(sptl);
+        }
+
+
+        public ActionResult CreateChang()
+        {
+            Chang Chang = new Chang();
+            /* 
+             Tour.LoaiKsan = data.KSans.ToList();
+
+             Tour.MayBays = data.PhuongTiens.ToList();
+             Tour.DiaDiems = data.DiaDiems.ToList();
+             Tour.LichTrinhs = data.LichTrinhs.ToList();*/
+            Chang.Tours = data.Tours.ToList();
+            return View(Chang);
+
+        }
+        [HttpPost]
+        public ActionResult CreateChang(FormCollection collection, Chang s)
+        {
+            /*
+            s.LoaiKsan = data.KSans.ToList();
+            s.MayBays = data.PhuongTiens.ToList();
+            s.DiaDiems = data.DiaDiems.ToList();
+            s.LichTrinhs = data.LichTrinhs.ToList();*/
+
+            
+            s.Tours = data.Tours.ToList();
+           
+            s.ID = int.Parse(Request.Form["ID"]);
+
+            var E_Ten = collection["TenChang"];
+            var E_Gia = Convert.ToInt32(collection["Gia"]);
+            var E_NoiDung = collection["NoiDungChang"];
+            if (string.IsNullOrEmpty(E_Ten))
+            {
+                ViewData["Error"] = "Don't empty!";
+            }
+            else
+            {
+                s.TenChang = E_Ten.ToString();
+                s.GiaChang = E_Gia;
+                
+                s.NoiDungChang = E_NoiDung.ToString();
+
+
+
+                
+
+                data.Changs.InsertOnSubmit(s);
+                data.SubmitChanges();
+                return RedirectToAction("Index");
+            }
+
+            return this.CreateChang();
+        }
         public ActionResult Chitietdonhang(int id)
         {
             var D_tour = data.DatTours.FirstOrDefault(m => m.MaDatTour == id);

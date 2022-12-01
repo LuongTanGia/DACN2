@@ -11,15 +11,17 @@ namespace DACN2.Models
     {
 
 
-        /*        public List<LoaiTour> LoaiTours = new List<LoaiTour>();
+        /*        
                 public List<KSan> LoaiKsan = new List<KSan>();
 
 
-                public List<NhanVien> HuongDanViens = new List<NhanVien>();
+                
                 public List<DiaDiem> DiaDiems = new List<DiaDiem>();
                 public List<PhuongTien> MayBays = new List<PhuongTien>();
-                public List<LichTrinh> LichTrinhs = new List<LichTrinh>();*/
-                public List<Chang> Chang = new List<Chang>();
+                public List<LichTrinh> LichTrinhs = new List<LichTrinh>();
+                public List<Chang> Chang = new List<Chang>();*/
+                public List<NhanVien> HuongDanViens = new List<NhanVien>();
+                public List<LoaiTour> LoaiTours = new List<LoaiTour>();
 
 
 
