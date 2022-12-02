@@ -138,6 +138,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyData.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\NhanVien.cs" />
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2347,6 +2348,7 @@
     <Content Include="Views\NhanVien\DangNhap.cshtml" />
     <Content Include="Views\NhanVien\ListKhachHang.cshtml" />
     <Content Include="Views\NhanVien\CreateChang.cshtml" />
+    <Content Include="Views\NhanVien\CreateNhanVien.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

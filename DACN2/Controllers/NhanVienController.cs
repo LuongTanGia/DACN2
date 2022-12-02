@@ -244,13 +244,7 @@ namespace DACN2.Controllers
 
         public ActionResult CreateChang()
         {
-            Chang Chang = new Chang();
-            /* 
-             Tour.LoaiKsan = data.KSans.ToList();
-
-             Tour.MayBays = data.PhuongTiens.ToList();
-             Tour.DiaDiems = data.DiaDiems.ToList();
-             Tour.LichTrinhs = data.LichTrinhs.ToList();*/
+            Chang Chang = new Chang();          
             Chang.Tours = data.Tours.ToList();
             return View(Chang);
 
@@ -258,13 +252,7 @@ namespace DACN2.Controllers
         [HttpPost]
         public ActionResult CreateChang(FormCollection collection, Chang s)
         {
-            /*
-            s.LoaiKsan = data.KSans.ToList();
-            s.MayBays = data.PhuongTiens.ToList();
-            s.DiaDiems = data.DiaDiems.ToList();
-            s.LichTrinhs = data.LichTrinhs.ToList();*/
-
-            
+           
             s.Tours = data.Tours.ToList();
            
             s.ID = int.Parse(Request.Form["ID"]);
@@ -279,20 +267,52 @@ namespace DACN2.Controllers
             else
             {
                 s.TenChang = E_Ten.ToString();
-                s.GiaChang = E_Gia;
-                
+                s.GiaChang = E_Gia;                
                 s.NoiDungChang = E_NoiDung.ToString();
-
-
-
-                
-
                 data.Changs.InsertOnSubmit(s);
                 data.SubmitChanges();
                 return RedirectToAction("Index");
             }
 
             return this.CreateChang();
+        }
+        public ActionResult CreateNhanVien()
+        {
+            NhanVien NhanVien = new NhanVien();
+            NhanVien.chucVus = data.ChucVus.ToList();
+            return View(NhanVien);
+
+        }
+        [HttpPost]
+        public ActionResult CreateNhanVien(FormCollection collection, NhanVien s)
+        {
+
+            s.chucVus = data.ChucVus.ToList();
+
+            s.MaCV = int.Parse(Request.Form["MaCV"]);
+
+            var E_Ten = collection["TenNV"];
+            var E_SDT = Convert.ToInt32(collection["SDT"]);
+            var E_Email = collection["Email"];
+
+            var E_MatKhau = collection["MatKhau"];
+            if (string.IsNullOrEmpty(E_Ten))
+            {
+                ViewData["Error"] = "Don't empty!";
+            }
+            else
+            {
+                s.TenNV = E_Ten.ToString();
+                s.SDT = E_SDT;
+                s.Email = E_Email.ToString();
+                s.MatKhau = E_MatKhau.ToString();
+
+                data.NhanViens.InsertOnSubmit(s);
+                data.SubmitChanges();
+                return RedirectToAction("Index");
+            }
+
+            return this.CreateNhanVien();
         }
         public ActionResult Chitietdonhang(int id)
         {

@@ -61,27 +61,41 @@
                     <li>
                         @Html.ActionLink("Danh Sachh Tour", "ListTour", "NhanVien")
                     </li>
-                    <li>
-                        @Html.ActionLink("Danh Sachh Chang", "ListChang", "NhanVien")
-                    </li>
-                    <li>
-                        @Html.ActionLink("Danh Sachh Linh Trinh", "ListLichTrinh", "NhanVien")
-                    </li>
-                    <li>
-                        @Html.ActionLink("Thong Tin Khac", "Index", "NhanVien")
-                    </li>
-                    <li>
-                        @Html.ActionLink("Home", "Index", "Tour")
-                    </li>
-                    <li>
-                        @Html.ActionLink("Home", "Index", "Tour")
-                    </li>
-                    <li>
-                        @Html.ActionLink("Home", "Index", "Tour")
-                    </li>
-                    <li class="active-pro">
-                        @Html.ActionLink("Home", "Index", "Tour")
-                    </li>
+                    @using DACN2.Models
+                    @{
+                        NhanVien kh = (NhanVien)Session["TaiKhoan"];
+                    }
+                    @if (kh.MaCV == 2 )
+                    {
+                        <li>
+                            @Html.ActionLink("Danh Sachh Chang", "ListChang", "NhanVien")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Danh Sachh Linh Trinh", "ListLichTrinh", "NhanVien")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Thong Tin Khac", "Index", "NhanVien")
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li>
+                            @Html.ActionLink("Home", "Index", "Tour")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Home", "Index", "Tour")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Home", "Index", "Tour")
+                        </li>
+                        <li class="active-pro">
+                            @Html.ActionLink("Home", "Index", "Tour")
+                        </li>
+
+
+                    }
+
                 </ul>
             </div>
         </div>
@@ -134,7 +148,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             @if (Session["TaiKhoan"] != null)
                             {
-                                <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-user"></i> </a></li>
+                                <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-user"></i>@kh.ChucVu.TenCV : @kh.TenNV </a></li>
 
                                 <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-right-from-bracket"></i> </a></li>
                                 <li>@Html.ActionLink("Đăng Xuất", "DangXuat", "KhachHang")</li>

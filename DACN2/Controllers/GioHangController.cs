@@ -246,6 +246,7 @@ namespace DACN2.Controllers
             return View(lstGiohang);
 
         }
+
         public ActionResult DatHang(System.Web.Mvc.FormCollection collection)
         {
             DatTour dt = new DatTour();
