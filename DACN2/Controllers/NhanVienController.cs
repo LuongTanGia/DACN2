@@ -19,7 +19,7 @@ namespace DACN2.Controllers
         {
 
             
-
+            
             var sptl = from ss in data.Changs select ss;
             List<Chang> changs = data.Changs.Where(s => s.GiaChang != null ).ToList();
             
@@ -63,9 +63,55 @@ namespace DACN2.Controllers
             return PartialView(sptl);
 
         }
+        
         public ActionResult ListTour()
         {
+            
+
             var sptl = from ss in data.Tours select ss;
+
+            List<Tour> tours = data.Tours.Where(s => s.Gia != null).ToList();
+            if (tours.Count > 0)
+            {
+                for (int i = 0; i < tours.Count; i++)
+                {
+
+                    Tour Tour = data.Tours.FirstOrDefault(s => s.ID == tours[i].ID);
+                    decimal tongTien = 0;
+                    decimal TongTienLoi = 0;
+                    if (Tour != null)
+                    {
+
+                      
+                        List<Chang> Changs = data.Changs.Where(s => s.ID == Tour.ID).ToList();
+                        if (Changs.Count > 0)
+                        {
+
+                            for (int j = 0; j < Changs.Count; j++)
+                            {
+
+                                Chang chang = data.Changs.FirstOrDefault(s => s.ID == Changs[j].ID && s.GiaChang != null);
+                                if (chang != null)
+                                {
+                                    tongTien += (decimal)chang.GiaChang;
+                                }
+                                if (tongTien > 0)
+                                {
+                                    Tour.TongChang = tongTien;
+                                    Tour.LoiNhuan = (decimal)(Tour.Gia - Tour.TongChang);
+                                    TongTienLoi = tours.Sum(s => s.LoiNhuan);
+                                    UpdateModel(Tour);
+                                    data.SubmitChanges();
+                                    ViewBag.tongtien = TongTienLoi;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+
             return PartialView(sptl);
 
         }
@@ -114,7 +160,7 @@ namespace DACN2.Controllers
         }
         public ActionResult ListNguoiDiTour(int id)
         {
-            var sptl = from ss in data.NguoiDiTours where ss.MaDatTour == id select ss;
+            var sptl = from ss in data.NguoiDiTours where ss.ChiTietDatTour.ID == id select ss;
             return PartialView(sptl);
 
         }

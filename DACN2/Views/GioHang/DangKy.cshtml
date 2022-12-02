@@ -10,7 +10,9 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+    <h1>So Luong Dat : @ViewBag.number</h1>
+    <input type="hidden" id="number" name="number" value="@ViewBag.number" />
+    <input type="hidden" id="abc" name="abc" value="@ViewBag.id" />
     <div class="form-horizontal">
         <h4>NguoiDiTour</h4>
         <hr />

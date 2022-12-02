@@ -34,7 +34,7 @@ namespace DACN2.Controllers
                 return Redirect(strURL);
             }
             else
-            {   
+            {
 
                 sanpham.iSoluongNguoiLon++;
                 sanpham.iSoluongTreEm++;
@@ -79,55 +79,91 @@ namespace DACN2.Controllers
 
 
         [HttpGet]
-        
-        public ActionResult DangKy()
+
+        public ActionResult DangKy(int id, string number)
         {
-            for (int i = TongSoLuong(); i >= 0; i--)
+            //for (int i = TongSoLuong(); i >= 0; i--)
+            //{
+            //    if (TongSoLuong() - i != 0)
+            //    {
+            //        return View();
+            //    }
+            //}
+
+            if (id > 0 && number != null)
             {
-                if (TongSoLuong() - i != 0)
+                int number1 = int.Parse(number);
+                Tour tour = data.Tours.FirstOrDefault(s => s.ID == id);
+                if (tour != null)
                 {
-                    return View();
+                    int number2 = 0;
+                    List<NguoiDiTour> count = data.NguoiDiTours.Where(s => s.ID == tour.ID).ToList();
+                    if (count != null)
+                    {
+                        number2 = (int)tour.SoCho - count.Count;
+                    }
+                    else
+                    {
+                        number2 = (int)tour.SoCho;
+                    }
+                    if (number2 > number1)
+                    {
+                        ViewBag.number = number1;
+                        ViewBag.id = id;
+                        return View();
+                    }
                 }
-                
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         public ActionResult DangKy(FormCollection collection, NguoiDiTour khs)
         {
-           
-                for (int i = TongSoLuong(); i >= 0;)
-                {
-                    var Ten = collection["Ten"];
-                    var Email = collection["Email"];
-                    var DiaChi = collection["DiaChi"];
-                    var SDT = Convert.ToInt32(collection["SDT"]);
 
-                    if (string.IsNullOrEmpty(Ten))
+            for (int i = TongSoLuong(); i >= 0;)
+            {
+                var Ten = collection["Ten"];
+                var Email = collection["Email"];
+                var DiaChi = collection["DiaChi"];
+                var SDT = Convert.ToInt32(collection["SDT"]);
+                var number = collection["number"];
+                int number1 = int.Parse(number);
+                number1--;
+                var abc = collection["abc"];
+                int id = int.Parse(abc);
+                if (string.IsNullOrEmpty(Ten))
+                {
+                    ViewData["Error"] = "Don't empty!";
+                }
+                else
+                {
+                    khs.Ten = Ten.ToString();
+                    khs.Email = Email.ToString();
+                    khs.SDT = SDT;
+                    data.NguoiDiTours.InsertOnSubmit(khs);
+                    data.SubmitChanges();
+
+                    ViewBag.number = number1;
+                    if (number1 > 0)
                     {
-                        ViewData["Error"] = "Don't empty!";
+
+                        return RedirectPermanent("/GioHang/DangKy/" + id + "?number=" + number1);
                     }
                     else
                     {
-                        khs.Ten = Ten.ToString();
-                        khs.Email = Email.ToString();
-                        khs.SDT = SDT;
-
-                        data.NguoiDiTours.InsertOnSubmit(khs);
-                        data.SubmitChanges();
-                        
-                        return RedirectToAction("DangKy");
+                        return RedirectToAction("GioHang", "GioHang");
                     }
-                
                 }
 
-               
-                
+            }
 
-            
+
+
+
+
             return RedirectToAction("Index");
         }
-        
+
         public ActionResult Giohang()
         {
             ViewBag.Tongsoluongsanpham = TongSoLuongSanPham();
@@ -148,7 +184,7 @@ namespace DACN2.Controllers
             ViewBag.Tongtien = TongTien();
             return PartialView(lstGiohang);
         }
-        
+
         public ActionResult GiohangPartial()
         {
 
@@ -179,13 +215,13 @@ namespace DACN2.Controllers
             GioHang sanpham = lstGiohang.SingleOrDefault(n => n.ID == id);
             if (sanpham != null)
             {
-               sanpham.iSoluongNguoiLon = int.Parse(collection["txtSolg1"].ToString());
+                sanpham.iSoluongNguoiLon = int.Parse(collection["txtSolg1"].ToString());
                 sanpham.iSoluongTreEm = int.Parse(collection["txtSolg2"].ToString());
 
             }
             return RedirectToAction("GioHang");
         }
-        
+
         public ActionResult XoaTatCaGiohang()
         {
             List<GioHang> lstGiohang = Laygiohang();
@@ -201,41 +237,47 @@ namespace DACN2.Controllers
                 return RedirectToAction("Index", "Tour");
             }
             List<GioHang> lstGiohang = Laygiohang();
-            
+
             ViewBag.Tongsoluong = TongSoLuong();
             ViewBag.Tongtien = TongTien();
             ViewBag.TienGiam1 = TongTien() * 0.7;
             ViewBag.TienGiam2 = TongTien() * 0.5;
             ViewBag.Tongsoluongsanpham = TongSoLuongSanPham();
             return View(lstGiohang);
-            
+
         }
         public ActionResult DatHang(System.Web.Mvc.FormCollection collection)
         {
             DatTour dt = new DatTour();
             KhachHang kh = (KhachHang)Session["Taikhoan"];
-            
+
             List<GioHang> gh = Laygiohang();
             List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
             dt.SoCho = lstGiohang.Sum(n => (n.iSoluongNguoiLon + n.iSoluongTreEm));
             dt.NgayDat = DateTime.Now;
             dt.MaKhachHang = kh.MaKhachHang;
-            
             data.DatTours.InsertOnSubmit(dt);
             data.SubmitChanges();
             double tong = 0;
             foreach (var item in gh)
             {
-                
                 ChiTietDatTour ctdh = new ChiTietDatTour();
                 ctdh.MaDatTour = dt.MaDatTour;
-                ctdh.ID= item.ID;
-                
-                data.SubmitChanges();
+                ctdh.ID = item.ID;
                 data.ChiTietDatTours.InsertOnSubmit(ctdh);
+                data.SubmitChanges();
                 tong += item.dThanhtien;
+                List<NguoiDiTour> nguoiDiTours = data.NguoiDiTours.Where(s => s.MaDatTour == null && s.ID == item.ID).ToList();
+                if (nguoiDiTours != null)
+                {
+                    for (int i = 0; i < nguoiDiTours.Count; i++)
+                    {
+                        nguoiDiTours[i].MaDatTour = dt.MaDatTour;
+                        UpdateModel(nguoiDiTours[i]);
+                    }
+                }
             }
-            data.SubmitChanges();   
+            data.SubmitChanges();
             Session["Giohang"] = null;
             return RedirectToAction("Index", "Giohang");
 
@@ -254,22 +296,22 @@ namespace DACN2.Controllers
             ViewBag.Ten = Ten;
             return PartialView();
         }*/
-       /* public ActionResult XacnhanDonhang()
-        {
-            return View();
-        }
-        public ActionResult XacNhanAdmin()
-        {
-            return View();
-        }
-        public ActionResult Ten()
-        {
+        /* public ActionResult XacnhanDonhang()
+         {
+             return View();
+         }
+         public ActionResult XacNhanAdmin()
+         {
+             return View();
+         }
+         public ActionResult Ten()
+         {
 
-            return PartialView();
+             return PartialView();
 
 
-        }
-*/
+         }
+ */
 
     }
 }

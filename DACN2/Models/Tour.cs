@@ -9,6 +9,8 @@ namespace DACN2.Models
 
     public partial class Tour
     {
+        public decimal TongChang { get; set; }
+        public decimal LoiNhuan { get; set; }
 
 
         /*        
@@ -20,7 +22,7 @@ namespace DACN2.Models
                 public List<PhuongTien> MayBays = new List<PhuongTien>();
                 public List<LichTrinh> LichTrinhs = new List<LichTrinh>();
                 public List<Chang> Chang = new List<Chang>();*/
-                public List<NhanVien> HuongDanViens = new List<NhanVien>();
+        public List<NhanVien> HuongDanViens = new List<NhanVien>();
                 public List<LoaiTour> LoaiTours = new List<LoaiTour>();
 
 

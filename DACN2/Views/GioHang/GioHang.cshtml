@@ -1,9 +1,22 @@
 ﻿@model IEnumerable<DACN2.Models.GioHang>
-@{
-    ViewBag.Title = "Giohang";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
+@{ ViewBag.Title = "Giohang";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+                int index = 0; }
+<script>
+    function ndt(index) {
+        var c = 'c' + index;
+        var n = document.getElementById(c);
+        var h = 'n' + index;
+        var s = document.getElementById(h);
+        let total = parseInt(n.value) + parseInt(s.value);
+        c.value = total;
+        var a = 'a' + index;
+        var l = document.getElementById(a);
+        var b = 'h' + index;
+        var d = document.getElementById(b);
+        l.href = d.value +  total;
+     }
+</script>
 <h2>Giỏ Hàng</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -25,14 +38,17 @@
                 @Html.DisplayNameFor(model => model.GiaTreEm)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.iSoluongNguoiLon)
+                @*@Html.DisplayNameFor(model => model.iSoluongNguoiLon)*@
+                So Cho Con Lai
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.iSoluongTreEm)
+                @*@Html.DisplayNameFor(model => model.iSoluongTreEm)*@
+                So Nguoi
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.dThanhtien)
             </th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
@@ -41,46 +57,46 @@
         @foreach (var item in Model)
         {
 
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.TenTour)</td>
-                <td> <img src="@item.Hinh" width="180" /></td>
-                @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.ID }))
-                {
-                    <td>@String.Format("{0:0,0}", item.GiaNguoiLon) VNĐ </td>
+<tr>
+    <td>@Html.DisplayFor(modelItem => item.TenTour)</td>
+    <td> <img src="@item.Hinh" width="180" /></td>
+    @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.ID }))
+    {
+<td>@String.Format("{0:0,0}", item.GiaNguoiLon) VNĐ </td>
                     <td>@String.Format("{0:0,0}", item.GiaTreEm) VNĐ </td>
 
-                    <td>
+                                        <td>
 
 
-                        <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max" name="txtSolg1" value="@item.iSoluongNguoiLon" style="width:40px; border:none" />
-
-                        @{
-                            @*tính số chỗ của trẻ em*@
-                            item.maxte = (item.max - item.iSoluongNguoiLon);
-                        }
+                                            @*<input type="number"  pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max" name="txtSolg1" value="@item.iSoluongNguoiLon" style="width:40px; border:none" />*@
+                                            <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max"
+                                                   name="txtSolg1" value="@item.iSoChoCon" style="width:40px; border:none" disabled />
+                                            @{ @*tính số chỗ của trẻ em*@ item.maxte = (item.max - item.iSoluongNguoiLon); }
 
 
 
 
-                    </td>
+                                        </td>
 
-                    <td>
-                        <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="0" max="@item.maxte" name="txtSolg2" value="@item.iSoluongTreEm" style="width:40px; border:none" />
+                                                            <td>
+                                                                @*<input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="0" max="@item.maxte" name="txtSolg2" value="@item.iSoluongTreEm" style="width:40px; border:none" />*@
+                                                                <input type="number" id="n@(item.ID)" onchange="ndt('@(item.ID)')" pattern=" 0+\.[0-9]*[1-9][0-9]*$"
+                                                                       min="0" max="@item.maxte" name="txtSolg2" value="0" style="width:40px; border:none" />
 
-                    </td>
-                    <td> @Html.DisplayFor(modelItem => item.dThanhtien)</td>
-                    <td>
-                        <a href="@Url.Action("Detail", "Giay", new { id = item.ID })">Chi tiết</a> | @Html.ActionLink("Xóa", "XoaGiohang", new { @id = item.ID })
-                    </td>
-                    <td>
-                        <input type="submit" value="Cập Nhật" class="btn btn-success" />
-                    </td>
-
-                }
-            </tr>
-
-
-        }
+                                                            </td>
+                                                                                <td> @Html.DisplayFor(modelItem => item.dThanhtien)</td>
+                                                                                                    <td>
+                                                                                                        <a href="@Url.Action("Detail", "Giay", new { id = item.ID })">Chi tiết</a> | @Html.ActionLink("Xóa", "XoaGiohang", new { @id = item.ID })
+                                                                                                    </td>
+                                                                                                                        <td>
+                                                                                                                            <input type="hidden" id="h@(item.ID)" value="/GioHang/DangKy/@(item.ID)?number=" />
+                                                                                                                            <a href="#" id="a@(item.ID)">Nhap Nguoi Di</a>
+                                                                                                                            <input type="hidden" id="c@(item.ID)" value="0" />
+                                                                                                                        </td>
+                                                                                                                                            <td>
+                                                                                                                                                <input type="submit" value="Cập Nhật" class="btn btn-success" />
+                                                                                                                                            </td>                }
+</tr>}
 
 
 
@@ -96,185 +112,181 @@
         <em>@Html.ActionLink("Nhap Nguoi Di", "DangKy", "GioHang")</em>
 
         @*
-        @using DACN2.Models
-        @{
-            List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
+            @using DACN2.Models
+            @{
+                List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
 
-        }
+            }
 
-        @foreach (var n in lstGiohang)
-        {
-            <div>
-                <h4 style="width:100%; font-size:15px; font-weight:bold;">@n.TenTour</h4>
-                @{for (int i = 0; i < n.iSoluongNguoiLon; i++)
-                    {
+            @foreach (var n in lstGiohang)
+            {
+                <div>
+                    <h4 style="width:100%; font-size:15px; font-weight:bold;">@n.TenTour</h4>
+                    @{for (int i = 0; i < n.iSoluongNguoiLon; i++)
+                        {
 
-                        <div class="" style="width:100%;">
-
-
-
-                            <div class="info" style="display:flex;">
-                                <h5 style="margin: 10px 5px 0 0; font-weight:bold;">Người Thứ @(i+1)</h5>
-                                <div class="form-group " style="">
+                            <div class="" style="width:100%;">
 
 
 
-                                    @using (Html.BeginForm())
-                                    {
-                                        @Html.AntiForgeryToken()
+                                <div class="info" style="display:flex;">
+                                    <h5 style="margin: 10px 5px 0 0; font-weight:bold;">Người Thứ @(i+1)</h5>
+                                    <div class="form-group " style="">
 
-                                        <div class="form-horizontal">
-                                            <h4>NguoiDiTour</h4>
-                                            <hr />
-                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                        @using (Html.BeginForm())
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <div class="form-horizontal">
+                                                <h4>NguoiDiTour</h4>
+                                                <hr />
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.GioiTinh, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.MaDatTour, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.MaDatTour, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.MaDatTour, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
                                             <div class="form-group">
-                                                @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Create" class="btn btn-default" />
                                                 </div>
                                             </div>
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.GioiTinh, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.MaDatTour, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.MaDatTour, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.MaDatTour, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
+                                        }
 
 
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Create" class="btn btn-default" />
-                                            </div>
-                                        </div>
-                                    }
-
-
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                        }
+
 
                     }
-
-
-                }
-                <hr />
-            </div>
-        }
+                    <hr />
+                </div>
+            }
 
         *@
 
     </div>
-        <div class="card">
-            <h1>Shopping</h1>
-            <hr />
-            <div style="font-weight: bold; text-align: left; color: red;">
-                <div style="   display: flex; justify-content:space-between;">
-                    <p colspan="2">Số lượng Tour:</p>
-                    <p style="text-align: right;"> @ViewBag.Tongsoluongsanpham </p>
-                </div>
-                <div style="   display: flex; justify-content:space-between;">
-                    <p colspan="3">Số Chỗ:</p> <p> @ViewBag.Tongsoluong</p>
-                </div>
+    <div class="card">
+        <h1>Shopping</h1>
+        <hr />
+        <div style="font-weight: bold; text-align: left; color: red;">
+            <div style="   display: flex; justify-content:space-between;">
+                <p colspan="2">Số lượng Tour:</p>
+                <p style="text-align: right;"> @ViewBag.Tongsoluongsanpham </p>
+            </div>
+            <div style="   display: flex; justify-content:space-between;">
+                <p colspan="3">Số Chỗ:</p> <p> @ViewBag.Tongsoluong</p>
+            </div>
 
-                <div style="   display:block; justify-content:space-between;">
+            <div style="   display:block; justify-content:space-between;">
 
-                    @if (ViewBag.TongTien <= 300000)
-                    {
-                        <p colspan="4">Tổng tiền:</p>
-                        <p> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
-                    }
-                    else
-                    {
-                        if (ViewBag.TongTien > 300000 && ViewBag.TongTien <= 1000000)
-                        {
-                            <p colspan="4">Tổng tiền:</p>
-                            <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
-                            <p colspan="4">Giam Gia:</p>
-                            <p> @String.Format("{0:0,0}", ViewBag.TienGiam1) vnd </p>
-                            <p>Giam &#8595;30%</p>
-                        }
-                        else
-                        {
-                            <p colspan="4">Tổng tiền:</p>
-                            <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
-                            <p colspan="4">Giam Gia:</p>
-                            <p> @String.Format("{0:0,0}", ViewBag.TienGiam2) vnd </p>
-                            <p>Giam &#8595;50%</p>
+                @if (ViewBag.TongTien <= 300000)
+                {
+    <p colspan="4">Tổng tiền:</p>
+                    <p> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p> }
+                                else
+                                {
+                                    if (ViewBag.TongTien > 300000 && ViewBag.TongTien <= 1000000)
+                                    {
+                    <p colspan="4">Tổng tiền:</p>
+                                        <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
+                                                            <p colspan="4">Giam Gia:</p>
+                                                                                <p> @String.Format("{0:0,0}", ViewBag.TienGiam1) vnd </p>
+                                                                                                    <p>Giam &#8595;30%</p> }
+                                                                                                                    else
+                                                                                                                    {
+                                                                                                    <p colspan="4">Tổng tiền:</p>
+                                                                                                                        <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
+                                                                                                                                            <p colspan="4">Giam Gia:</p>
+                                                                                                                                                                <p> @String.Format("{0:0,0}", ViewBag.TienGiam2) vnd </p>
+                                                                                                                                                                                    <p>Giam &#8595;50%</p>}
 
-                        }
+                                                                                                                                                                                                }
 
-                    }
-
-
-                </div>
 
             </div>
-            <hr />
-            <div style="font-weight: bold; text-align: right; color:blue">
-                <div colspan="5">
-                    @*                @Html.ActionLink("Xóa Giỏ hàng", "XoaTatCaGiohang")
-                    *@                <a class="btn btn-danger" href="@Url.Action("XoaTatCaGiohang", "GioHang")" style="width:50%; margin-right:20px">Xoa Tat Ca </a>
 
+        </div>
+        <hr />
+        <div style="font-weight: bold; text-align: right; color:blue">
+            <div colspan="5">
+                @*                @Html.ActionLink("Xóa Giỏ hàng", "XoaTatCaGiohang")
+                *@                <a class="btn btn-danger" href="@Url.Action("XoaTatCaGiohang", "GioHang")" style="width:50%; margin-right:20px">Xoa Tat Ca </a>
 
-                </div>
-            </div>
-            <div style="font-weight: bold; text-align: right; color:yellow">
-                <div colspan="5" style="margin:20px;">
-                    @*@Html.ActionLink("Đặt Hàng", "Dathang", "GioHang")*@
-                    <a class="btn btn-info" href="@Url.Action("DatHang", "GioHang")" style="width:100%;"> Dat Hang</a>
-                </div>
 
             </div>
-            <hr />
-            <div class="">
-                <div class="card-body">
-                    <p><strong>We accept</strong></p>
+        </div>
+        <div style="font-weight: bold; text-align: right; color:yellow">
+            <div colspan="5" style="margin:20px;">
+                @*@Html.ActionLink("Đặt Hàng", "Dathang", "GioHang")*@
+                <a class="btn btn-info" href="@Url.Action("DatHang", "GioHang")" style="width:100%;"> Dat Hang</a>
+            </div>
+
+        </div>
+        <hr />
+        <div class="">
+            <div class="card-body">
+                <p><strong>We accept</strong></p>
+                <img class="me-2" width="45px"
+                     src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                     alt="Visa" />
+                <img class="me-2" width="45px"
+                     src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                     alt="American Express" />
+                <img class="me-2" width="45px"
+                     src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                     alt="Mastercard" />
+                <a href="@Url.Action("Payment","momo")">
                     <img class="me-2" width="45px"
-                         src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-                         alt="Visa" />
-                    <img class="me-2" width="45px"
-                         src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-                         alt="American Express" />
-                    <img class="me-2" width="45px"
-                         src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-                         alt="Mastercard" />
-                    <a href="@Url.Action("Payment","momo")">
-                        <img class="me-2" width="45px"
-                             src="https://is4-ssl.mzstatic.com/image/thumb/Purple123/v4/60/19/06/6019065e-3023-2217-ab41-fadff8c2cc4a/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-85-220.png/1024x1024bb.png"
-                             alt="PayPal acceptance mark" />
-                    </a>
-                </div>
+                         src="https://is4-ssl.mzstatic.com/image/thumb/Purple123/v4/60/19/06/6019065e-3023-2217-ab41-fadff8c2cc4a/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-85-220.png/1024x1024bb.png"
+                         alt="PayPal acceptance mark" />
+                </a>
             </div>
         </div>
     </div>
+</div>
 
 
 

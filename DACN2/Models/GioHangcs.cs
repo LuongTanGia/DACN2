@@ -28,10 +28,12 @@ namespace DACN2.Models
         public int iSoluongNguoiLon { get; set; }
         [Display(Name = "Số lượng Trẻ Em")]
         public int iSoluongTreEm { get; set; }
+        [Display(Name = "So Cho Con")]
+        public int iSoChoCon { get; set; }
         [Display(Name = "Thành tiền")]
         public Double dThanhtien
         {
-            get { return (iSoluongNguoiLon*GiaNguoiLon)+(iSoluongTreEm*GiaTreEm) ; }
+            get { return (iSoluongNguoiLon * GiaNguoiLon) + (iSoluongTreEm * GiaTreEm); }
         }
         public GioHang(int id)
         {
@@ -43,9 +45,18 @@ namespace DACN2.Models
             Hinh = tour.Hinh;
             GiaNguoiLon = double.Parse(tour.GiaNguoiLon.ToString());
             GiaTreEm = double.Parse(tour.GiaTreEm.ToString());
-           
+
             iSoluongNguoiLon = 1;
             iSoluongTreEm = 0;
+            List<NguoiDiTour> nguoiDiTours = data.NguoiDiTours.Where(s => s.ID == id).ToList();
+            if (nguoiDiTours != null)
+            {
+                iSoChoCon = (int)tour.SoCho - nguoiDiTours.Count;
+            }
+            else
+            {
+                iSoChoCon = (int)tour.SoCho;
+            }
         }
 
     }
