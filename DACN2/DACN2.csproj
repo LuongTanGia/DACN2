@@ -2349,6 +2349,8 @@
     <Content Include="Views\NhanVien\ListKhachHang.cshtml" />
     <Content Include="Views\NhanVien\CreateChang.cshtml" />
     <Content Include="Views\NhanVien\CreateNhanVien.cshtml" />
+    <Content Include="Views\NhanVien\CreateLichTrinh.cshtml" />
+    <Content Include="Views\KhachHang\DangKy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

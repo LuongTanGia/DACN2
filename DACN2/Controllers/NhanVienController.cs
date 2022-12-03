@@ -319,6 +319,52 @@ namespace DACN2.Controllers
             var D_tour = data.DatTours.FirstOrDefault(m => m.MaDatTour == id);
             return View(D_tour);
         }
+
+        public ActionResult CreateLichTrinh()
+        {
+            LichTrinh lichTrinh = new LichTrinh();
+
+            lichTrinh.Ksans = data.KSans.ToList();
+            lichTrinh.Changs = data.Changs.ToList();
+            lichTrinh.DiaDiems = data.DiaDiems.ToList();
+            lichTrinh.PhuongTiens = data.PhuongTiens.ToList();
+            lichTrinh.AnUongs = data.AnUongs.ToList();
+
+
+            return View(lichTrinh);
+
+        }
+        [HttpPost]
+        public ActionResult CreateLichTrinh(FormCollection collection, LichTrinh s)
+        {
+
+            s.Ksans = data.KSans.ToList();
+            s.Changs = data.Changs.ToList();
+            s.DiaDiems = data.DiaDiems.ToList();
+            s.PhuongTiens = data.PhuongTiens.ToList();
+            s.AnUongs = data.AnUongs.ToList();
+
+            
+
+            var E_Ten = collection["TenLichTrinh"];
+            var E_Gia = Convert.ToInt32(collection["GiaLichTrinh"]);
+            
+            if (string.IsNullOrEmpty(E_Ten))
+            {
+                ViewData["Error"] = "Don't empty!";
+            }
+            else
+            {
+                s.TenLichTrinh = E_Ten.ToString();
+                s.GiaLichTrinh = E_Gia;
+                
+                data.LichTrinhs.InsertOnSubmit(s);
+                data.SubmitChanges();
+                return RedirectToAction("Index");
+            }
+
+            return this.CreateLichTrinh();
+        }
         public ActionResult DangNhap()
         {
             return View();

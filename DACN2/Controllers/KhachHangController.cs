@@ -16,7 +16,72 @@ namespace DACN2.Controllers
         // GET: NguoiDung
         MyDataDataContext data = new MyDataDataContext();
 
-        
+        [HttpGet]
+        public ActionResult DangKy()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DangKy(FormCollection collection, KhachHang kh)
+        {
+            
+            var hoten = collection["Ten"];
+            var tendangnhap = collection["TenDangNhap"];
+            var matkhau = collection["MatKhau"];
+            var MatkhauXacNhan = collection["MatKhauXacNhan"];
+            var email = collection["Email"];
+            var diachi = collection["DiaChi"];
+            var dienthoai = collection["STD"];
+            var CMND = collection["CMND"];
+
+            
+
+
+           /* if (String.IsNullOrEmpty(MatkhauXacNhan))
+                ViewData["NhapMKXN"] = "Phải nhập đủ thông tin!";
+            if (String.IsNullOrEmpty(hoten))
+                ViewData["NhapHoten"] = "Phải nhập đủ họ tên";
+            if (String.IsNullOrEmpty(dienthoai))
+                ViewData["nhapDT"] = "Phải nhập số điện thoại";
+            if (String.IsNullOrEmpty(diachi))
+                ViewData["nhapDC"] = "Phải nhập địa chỉ";
+            if (String.IsNullOrEmpty(email))
+                ViewData["nhapEmail"] = "Phải nhập Email";
+
+            if (String.IsNullOrEmpty(tendangnhap))
+                ViewData["NhapTK"] = "Phải nhập tên đăng nhập";
+            if (String.IsNullOrEmpty(matkhau))
+                ViewData["nhapMK"] = "Phải nhập mật khẩu";
+            if (matkhau.Length > 8)
+                ViewData["dodaiMK"] = "mật khẩu phải nhiều hơn 8 ký tự";
+            
+
+            else
+            {
+            }*/
+                if (!matkhau.Equals(MatkhauXacNhan))
+                {
+                    ViewData["MatkhauGiongNhau"] = "Mật khẩu và mật khẩu xác nhận phải giống nhau";
+                }
+                else
+                {
+                   
+                    kh.Ten = hoten;
+                    kh.TenDangNhap = tendangnhap;
+                    kh.MatKhau = matkhau;
+                    kh.Email = email;
+                    kh.DiaChi = diachi;
+                    kh.CMND = Convert.ToInt32(CMND);
+                    kh.SDT = Convert.ToInt32(dienthoai);
+                    
+                    
+                    data.KhachHangs.InsertOnSubmit(kh);
+                    data.SubmitChanges();
+                    return RedirectToAction("DangNhap");
+                }
+            return this.DangKy();
+        }
         [HttpGet]
         public ActionResult DangNhap()
         {
